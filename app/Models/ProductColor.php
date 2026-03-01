@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\ProductColorObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductColor extends Model
 {
@@ -17,5 +18,10 @@ class ProductColor extends Model
     {
         parent::boot();
         self::observe(ProductColorObserver::class);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo('product_type', 'id', 'type_id');
     }
 }

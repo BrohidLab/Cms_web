@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/product-type-delete/{typeId}', [ProductController::class, 'deleteTypeProduct'])->name('delete_product_type');
         Route::put('/update-product/{idProduct}', [ProductController::class, 'updateCreateProduct'])->name('update_product');
         Route::get('/create/{idProduct}/product-type', [ProductController::class, 'createProductType'])->name('create_product_type');
+        Route::get('/create/{idProduct}/product-type-color', [ProductController::class, 'productColor'])->name('create_product_color');
         
     });
 });

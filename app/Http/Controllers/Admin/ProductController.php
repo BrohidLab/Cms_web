@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -115,5 +116,13 @@ class ProductController extends Controller
             ], 500);
         }
 
+    }
+
+    public function productColor($idProduct) {
+        $product = Product::where('id', $idProduct)->first();
+        $type = ProductType::where('product_id', $idProduct)->get();
+        $typeColor = ProductColor::with('type')->get();
+        
+        return view('pages.admin.pages.product.create-product-color', compact('type', 'product', 'typeColor'));
     }
 }
