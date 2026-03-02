@@ -15,9 +15,17 @@
 
             <div>
                 <h2 class="text-lg font-semibold mb-6 text-gray-800">Type Color Product</h2>
-                <form action="{{ route('product.store_product_type') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('product.store_product_color') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
+                    @if ($errors->any())
+                        <div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-xl">
+                            <ul class="list-disc list-inside text-sm">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="grid md:grid-cols-4 gap-6">
 
                         <div>
@@ -60,7 +68,8 @@
                             <select name="type_id"
                                 class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 @foreach ($type as $items)
-                                    <option value={{ $items->id }}>{{ $items->name }}</option>
+                                    <option value={{ $items->id }}>{{ $items->name }} - {{ $items->transmition }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -73,62 +82,91 @@
 
 
                             <div class="w-full overflow-hidden">
-                                <div class="border-b py-6 border-gray-200">
+                                <div class="py-6">
                                     <h2 class="text-md md:text-lg font-semibold text-gray-800">
                                         Type Color List
                                     </h2>
                                 </div>
 
-                                <div class="overflow-x-auto">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                            <tr>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-                                                    Name Color</th>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-                                                    Type Color</th>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-                                                    Code Color</th>
-                                                <th
-                                                    class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase">
-                                                    Action</th>
-                                            </tr>
-                                        </thead>
+                                <div class="space-y-8">
 
-                                        <tbody class="bg-white divide-y divide-gray-100" id="type-table-body">
+                                    @forelse ($typeColor as $typeId => $colors)
+                                        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm">
 
-                                            @forelse ($typeColor as $color)
-                                                <tr id="row-{{ $color->id }}" class="hover:bg-gray-50 transition">
-                                                    <td class="px-6 py-4 text-sm font-medium text-gray-800">
-                                                        {{ $color->name }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-sm text-gray-600">
-                                                        {{ $color->type->name }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-sm text-gray-600">
-                                                        {{ $color->code_color }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-center">
-                                                        <button type="button"
-                                                            data-url="{{ route('product.delete_product_type', $type->id) }}"
-                                                            class="btn-delete bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
-                                                            Delete
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                                <tr id="empty-row">
-                                                    <td colspan="4" class="px-6 py-6 text-center text-gray-500">
-                                                        Data not found
-                                                    </td>
-                                                </tr>
-                                            @endforelse
+                                            {{-- Header Type --}}
+                                            <div class="px-6 py-5 border-b bg-gray-50 rounded-t-2xl">
+                                                <h2 class="text-lg font-semibold text-gray-800">
+                                                    {{ $colors->first()->type->name }}
+                                                    <span class="text-sm text-gray-500 font-normal">
+                                                        - {{ $colors->first()->type->transmition }}
+                                                    </span>
+                                                </h2>
+                                            </div>
 
-                                        </tbody>
-                                    </table>
+                                            {{-- List Color --}}
+                                            <div class="p-6 grid md:grid-cols-3 gap-6">
+
+                                                @foreach ($colors as $color)
+                                                    <div data-id="{{ $color->id }}"
+                                                        class="color-card border rounded-xl p-4 hover:shadow-md transition bg-gray-50">
+
+                                                        <div class="flex justify-between items-start mb-3">
+
+                                                            <div>
+                                                                <h3 class="font-semibold text-gray-800">
+                                                                    {{ $color->name }}
+                                                                </h3>
+
+                                                                <p class="text-xs text-gray-500 capitalize">
+                                                                    {{ str_replace('_', ' ', $color->jenis_color) }}
+                                                                </p>
+                                                            </div>
+
+                                                            <button type="button"
+                                                                data-url="{{ route('product.delete_product_color', $color->id) }}"
+                                                                class="btn-delete text-red-500 hover:text-red-600 text-sm">
+                                                                Delete
+                                                            </button>
+
+                                                        </div>
+
+                                                        {{-- Preview Color --}}
+                                                        <div class="flex items-center gap-3">
+
+                                                            {{-- Primary --}}
+                                                            <div class="w-10 h-10 rounded-full border shadow"
+                                                                style="background-color: {{ $color->code_color }}">
+                                                            </div>
+
+                                                            {{-- Secondary (jika two tone) --}}
+                                                            @if ($color->jenis_color === 'two_tone')
+                                                                <div class="w-10 h-10 rounded-full border shadow"
+                                                                    style="background-color: {{ $color->code_color2 }}">
+                                                                </div>
+                                                            @endif
+
+                                                        </div>
+
+                                                        {{-- Code --}}
+                                                        <div class="mt-3 text-xs text-gray-500">
+                                                            {{ $color->code_color }}
+                                                            @if ($color->jenis_color === 'two_tone')
+                                                                - {{ $color->code_color2 }}
+                                                            @endif
+                                                        </div>
+
+                                                    </div>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+
+                                    @empty
+                                        <div class="text-center text-gray-500 py-10">
+                                            Data not found
+                                        </div>
+                                    @endforelse
+
                                 </div>
                             </div>
                         </div>
@@ -143,13 +181,13 @@
                     </span>
                     Kembali
                 </a>
-                <button type="submit" id="btn-next" {{ $typeColor->count() == 0 ? 'disabled' : '' }}
+                <a href="{{ route('product.product.create_product_image', $product->id) }}" id="btn-next" {{ $typeColor->count() == 0 ? 'disabled' : '' }}
                     class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-md text-white px-6 py-2 flex items-center rounded-sm shadow transition">
                     Selanjutnya
                     <span class="material-symbols-outlined">
                         chevron_right
                     </span>
-                </button>
+                </a>
             </div>
         </div>
 
@@ -195,9 +233,10 @@
 
             let button = $(this);
             let url = button.data('url');
+            let card = button.closest('.color-card');
 
             Swal.fire({
-                title: 'Hapus data?',
+                title: 'Hapus warna?',
                 text: "Data tidak bisa dikembalikan",
                 icon: 'warning',
                 showCancelButton: true,
@@ -209,77 +248,47 @@
 
                 if (result.isConfirmed) {
 
-                    // disable button + loading
-                    button.prop('disabled', true);
-                    button.html('Deleting...');
-
                     $.ajax({
                         url: url,
                         type: "DELETE",
                         data: {
                             _token: "{{ csrf_token() }}"
                         },
-                        beforeSend: function() {
-                            Swal.showLoading();
-                        },
-
                         success: function(response) {
 
-                            // Hapus row
-                            button.closest('tr').fadeOut(300, function() {
+                            card.fadeOut(300, function() {
                                 $(this).remove();
+
+                                // kalau semua card dalam satu type habis
+                                if ($('.color-card').length === 0) {
+                                    $('.space-y-8').html(`
+                                <div class="text-center text-gray-500 py-10">
+                                    Data not found
+                                </div>
+                            `);
+                                }
                             });
 
-                            // Toast Success
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 2500,
-                                timerProgressBar: true,
-                            });
-
-                            Toast.fire({
+                            Swal.fire({
                                 icon: 'success',
-                                title: 'Data berhasil dihapus'
+                                title: 'Berhasil!',
+                                text: 'Warna berhasil dihapus',
+                                timer: 1500,
+                                showConfirmButton: false
                             });
 
                         },
-
-                        error: function(xhr) {
-
-                            let errorMessage = 'Terjadi kesalahan pada server';
-
-                            if (xhr.responseJSON) {
-
-                                // kalau ada message langsung
-                                if (xhr.responseJSON.message) {
-                                    errorMessage = xhr.responseJSON.message;
-                                }
-
-                                // kalau validation error
-                                else if (xhr.responseJSON.errors) {
-                                    errorMessage = Object.values(xhr.responseJSON.errors)
-                                        .flat()
-                                        .join('<br>');
-                                }
-                            }
-
+                        error: function() {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Gagal!',
-                                html: errorMessage
+                                text: 'Terjadi kesalahan pada server'
                             });
-
-                            button.prop('disabled', false);
-                            button.html('Delete');
                         }
                     });
-
                 }
 
             });
-
         });
     </script>
 @endpush

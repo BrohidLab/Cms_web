@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\ProductImageObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductImage extends Model
 {
@@ -18,6 +19,21 @@ class ProductImage extends Model
     {
         parent::boot();
         self::observe(ProductImageObserver::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(ProductType::class);
+    }
+
+    public function color(): BelongsTo
+    {
+        return $this->belongsTo(ProductColor::class);
     }
     
 }

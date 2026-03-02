@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_galleries', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->ulid('product_id');
+            $table->uuid('product_id');
             $table->string('category');
             $table->string('image');
             $table->timestamps();

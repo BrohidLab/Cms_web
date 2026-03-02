@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductColor extends Model
 {
-    protected $fillable = ['type_id', 'name', 'code_color'];
+    protected $fillable = ['type_id', 'name', 'code_color', 'jenis_color', 'code_color2'];
 
     protected $casts = [
         'id' => 'string',
@@ -22,6 +22,11 @@ class ProductColor extends Model
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo('product_type', 'id', 'type_id');
+        return $this->belongsTo(ProductType::class, 'type_id');
+    }
+
+    public function images(): BelongsTo
+    {
+        return $this->belongsTo(ProductImage::class, 'color_id');
     }
 }

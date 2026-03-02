@@ -18,4 +18,9 @@ class ProductGallery extends Model
         parent::boot();
         self::observe(ProductGalleryObserver::class);
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

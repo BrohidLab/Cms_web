@@ -28,56 +28,47 @@
 
             @forelse($products as $product)
                 <div
-                    class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 p-6">
-                    <a href="{{ route('product.create', $product->id) }}">
-                        <!-- Title -->
-                        <div class="flex justify-between items-start mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800">
+                    class="group bg-white rounded-3xl shadow-sm hover:shadow-2xl transition duration-300 border overflow-hidden">
+
+                    {{-- Thumbnail --}}
+                    <div class="h-52 bg-gray-100 overflow-hidden">
+                        @if ($product->mainImage)
+                            <img src="{{ asset('storage/' . $product->mainImage->image) }}"
+                                class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                                No Image
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="p-6">
+
+                        {{-- Header --}}
+                        <div class="flex justify-between items-start mb-3">
+                            <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition">
                                 {{ $product->name }}
                             </h2>
 
                             <span
-                                class="text-xs px-3 py-1 rounded-full 
-                    {{ $product->status !== 'draf' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
-                                {{ $product->status === 'draf' ? 'Draf' : 'Publish' }}
+                                class="text-xs px-3 py-1 rounded-full font-medium
+                {{ $product->status !== 'draf' ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-600' }}">
+                                {{ $product->status === 'draf' ? 'Draft' : 'Published' }}
                             </span>
                         </div>
 
-                        <!-- Price -->
+                        {{-- Lowest Price --}}
                         <p class="text-xl font-bold text-blue-600 mb-3">
-                            Rp {{ number_format($product->price, 0, ',', '.') }}
+                            Rp {{ number_format($product->types_min_price ?? 0, 0, ',', '.') }}
                         </p>
 
-                        <!-- Description -->
-                        <p class="text-sm text-gray-500 line-clamp-3">
-                            {!! Str::limit(strip_tags($product->description), 120) !!}
+                        {{-- Description --}}
+                        <p class="text-sm text-gray-500 line-clamp-2">
+                            {{ Str::limit(strip_tags($product->description), 100) }}
                         </p>
 
-                        <!-- Footer -->
-                        <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-100">
+                    </div>
 
-                            <span class="text-xs text-gray-400">
-                                {{ $product->created_at->format('d M Y') }}
-                            </span>
-
-                            <div class="flex gap-3">
-
-                                <form action="{{ route('product.create', $product->id) }}" method="POST"
-                                    class="form-delete">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-medium">
-                                        <span class="material-symbols-outlined text-md">
-                                            delete
-                                        </span>
-                                    </button>
-                                </form>
-
-                            </div>
-
-                        </div>
-                    </a>
                 </div>
             @empty
                 <div class="col-span-3 text-center text-gray-400 py-16">

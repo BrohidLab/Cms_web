@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -19,5 +20,22 @@ class Product extends Model
     {
         parent::boot();
         self::observe(ProductObserver::class);
+    }
+
+    public function types()
+    {
+        return $this->hasMany(ProductType::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    // Ambil 1 main image saja
+    public function mainImage()
+    {
+        return $this->hasOne(ProductImage::class)
+                    ->where('is_main', true);
     }
 }

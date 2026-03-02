@@ -19,4 +19,9 @@ class ProductType extends Model
         parent::boot();
         self::observe(ProductTypeObserver::class);
     }
+
+    public function colors()
+    {
+        return $this->hasMany(ProductColor::class, 'type_id');
+    }
 }
