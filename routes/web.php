@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -55,5 +56,14 @@ Route::middleware('auth')->group(function () {
             [ProductController::class, 'publishProduct']
         )->name('publish_product');
 
+    });
+
+    Route::prefix('user-admin/article')->name('article.')->group(function () {
+        Route::get('/',[ArticleController::class ,'index'])->name('index');
+        Route::get('/create', [ArticleController::class, 'create'])->name('create');
+        Route::post('/store', [ArticleController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [ArticleController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [ArticleController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [ArticleController::class, 'destroy'])->name('destroy');
     });
 });
