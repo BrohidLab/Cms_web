@@ -46,9 +46,10 @@
 
                         {{-- Header --}}
                         <div class="flex justify-between items-start mb-3">
-                            <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition">
+                            <a href="{{ route('product.create', $product->id) }}"
+                                class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition">
                                 {{ $product->name }}
-                            </h2>
+                            </a>
 
                             <span
                                 class="text-xs px-3 py-1 rounded-full font-medium

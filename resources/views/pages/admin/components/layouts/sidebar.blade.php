@@ -18,8 +18,8 @@
 
         <div class="space-y-1">
 
-            <a href="#"
-                class="flex items-center gap-3 px-3 py-2 rounded-md bg-indigo-50 text-indigo-600 font-medium">
+            <a href="{{ route('dashboard') }}"
+                class="flex items-center gap-3 px-3 py-2 rounded-md {{ request()->routeIs('dashboard') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-indigo-50' }} font-medium">
                 <span class="material-symbols-outlined text-lg">dashboard</span>
                 Dashboard
             </a>
@@ -29,21 +29,31 @@
                 <button onclick="toggleMenu('usersMenu', this)"
                     class="w-full flex items-center justify-between px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
                     <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-lg">group</span>
-                        Users
+                        <span class="material-symbols-outlined text-lg">view_quilt</span>
+                        Front Pages
                     </div>
                     <span class="material-symbols-outlined text-base">expand_more</span>
                 </button>
 
-                <div id="usersMenu" class="hidden pl-10 mt-1 space-y-1 text-gray-500">
-                    <a href="#" class="block py-1 hover:text-indigo-600">All Users</a>
-                    <a href="#" class="block py-1 hover:text-indigo-600">Roles</a>
-                    <a href="#" class="block py-1 hover:text-indigo-600">Permissions</a>
+                <div id="usersMenu" class="hidden pl-4 mt-1 space-y-1 text-gray-500">
+                    <a href="#" class="block w-full flex items-center py-1 hover:text-indigo-600">
+                        <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
+                        Home Pages
+                    </a>
+                    <a href="#" class="block py-1 flex items-center hover:text-indigo-600">
+                        <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
+                        Roles
+                    </a>
+                    <a href="#" class="block py-1 flex items-center hover:text-indigo-600">
+                        <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
+                        Permissions
+                    </a>
                 </div>
             </div>
 
-            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
-                <span class="material-symbols-outlined text-lg">inventory_2</span>
+            <a href="{{ route('product.index') }}"
+                class="flex items-center gap-3 px-3 py-2 rounded-md {{ request()->routeIs('product.index') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-indigo-50' }}">
+                <span class="material-symbols-outlined text-lg">directions_car</span>
                 Products
             </a>
 
