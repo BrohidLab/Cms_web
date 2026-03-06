@@ -69,21 +69,15 @@
     <div class="flex flex-col items-center">
         <div class="relative w-full overflow-hidden">
             <div id="slider" class="flex transition-transform duration-700 ease-in-out">
-                @php
-                    $banners = [
-                        ['image' => 'https://cms.suzukihyperlocal.com/read-file?path=images/slider/1768958273.webp'],
-                        ['image' => 'https://cms.suzukihyperlocal.com/read-file?path=images/slider/1768872243.webp'],
-                        ['image' => 'https://cms.suzukihyperlocal.com/read-file?path=images/slider/1758253885.webp'],
-                    ];
-                @endphp
-                @foreach ($banners as $banner)
+                @foreach ($bannerSlide as $banner)
                     <div class="min-w-full">
-                        <img src="{{ $banner['image'] }}" class="w-full h-[150px] md:h-[540px] object-cover">
+                        <img src="{{ asset('storage/' . $banner->files) }}"
+                            class="w-full h-[150px] md:h-[540px] object-cover">
                     </div>
                 @endforeach
             </div>
             <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
-                @foreach ($banners as $index => $banner)
+                @foreach ($bannerSlide as $index => $banner)
                     <span class="dot w-2 h-2 bg-gray-400 rounded-full transition-colors duration-300 cursor-pointer"
                         data-index="{{ $index }}">
                     </span>
@@ -200,18 +194,18 @@
                 ];
             @endphp
             <div class="hidden md:grid grid-cols-3 gap-5 mt-7">
-                @foreach ($news as $item)
+                @foreach ($article as $item)
                     <div class="bg-white rounded-xl shadow">
-                        <img src="{{ $item['image'] }}" class="w-full h-48 object-cover rounded-t-xl">
+                        <img src="{{ asset('storage/' . $item->thumbnail) }}" class="w-full h-48 object-cover rounded-t-xl">
 
                         <div class="p-4">
                             <h3 class="font-semibold text-lg mb-2">
-                                {{ $item['title'] }}
+                                {{ $item->title }}
                             </h3>
 
-                            <p class="text-sm text-gray-500">
-                                {{ Str::limit($item['excerpt'], 100) }}
-                            </p>
+                            <div class="text-sm text-gray-500">
+                                {!! Str::limit($item->content, 100) !!}
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -221,20 +215,21 @@
                 {{-- Slider --}}
                 <div id="newsContainer" class="flex overflow-x-hidden scroll-smooth">
 
-                    @foreach ($news as $item)
+                    @foreach ($article as $item)
                         <div class="min-w-full px-2">
 
                             <div class="bg-white rounded-xl shadow">
 
-                                <img src="{{ $item['image'] }}" class="w-full h-48 object-cover rounded-t-xl">
+                                <img src="{{ asset('storage/' . $item->thumbnail) }}"
+                                    class="w-full h-48 object-cover rounded-t-xl">
 
                                 <div class="p-4">
                                     <h3 class="font-semibold text-lg mb-2">
-                                        {{ $item['title'] }}
+                                        {{ $item->title }}
                                     </h3>
 
                                     <p class="text-sm text-gray-500 mb-3">
-                                        {{ Str::limit($item['excerpt'], 100) }}
+                                        {{ Str::limit($item->content, 100) }}
                                     </p>
                                 </div>
 
@@ -367,16 +362,15 @@
 
                     {{-- LEFT FORM --}}
                     <div class="bg-gray-50 rounded-md shadow-lg p-6 md:p-8 text-gray-400">
-
-                        <form action="#" method="POST" class="space-y-6">
-
+                        <form action="{{ route('konsultasi.store') }}" method="POST" class="space-y-6">
+                            @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                                 <div>
                                     <label class="block text-sm font-medium mb-1">
                                         Nama Lengkap
                                     </label>
-                                    <input type="text"
+                                    <input type="text" name="name"
                                         class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
                                 </div>
 
@@ -384,7 +378,7 @@
                                     <label class="block text-sm font-medium mb-1">
                                         Nomor WhatsApp
                                     </label>
-                                    <input type="tel" placeholder="082xxxxxxx98"
+                                    <input name="no_wa" type="tel" placeholder="082xxxxxxx98"
                                         class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
                                 </div>
 
@@ -392,12 +386,13 @@
                                     <label class="block text-sm font-medium mb-1">
                                         Pilih Mobil
                                     </label>
-                                    <select
+                                    <select name="product_id"
                                         class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
                                         <option>-- Pilih Mobil --</option>
-                                        <option>Toyota Avanza</option>
-                                        <option>Suzuki XL7</option>
-                                        <option>Honda Brio</option>
+
+                                        @foreach ($products as $prod)
+                                            <option value="{{ $prod->id }}">{{ $prod->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -405,7 +400,7 @@
                                     <label class="block text-sm font-medium mb-1">
                                         Kota / Lokasi
                                     </label>
-                                    <input type="text" placeholder="Contoh : Semarang"
+                                    <input name="lokasi" type="text" placeholder="Contoh : Semarang"
                                         class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
                                 </div>
 
@@ -415,7 +410,7 @@
                                 <label class="block text-sm font-medium mb-1">
                                     Pesan
                                 </label>
-                                <textarea rows="4"
+                                <textarea name="pesan" rows="4"
                                     class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
                             </div>
 
@@ -425,6 +420,17 @@
                             </button>
 
                         </form>
+                        <div class="w-full text-center flex justify-center">
+                            @if (session('success'))
+                                <div class="text-green-700 px-4 py-3 rounded-lg text-sm">
+                                    {{ session('success') }}
+                                </div>
+                            @elseif(session('error'))
+                                <div class="text-red-700 px-4 py-3 rounded-lg text-sm">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                        </div>
 
                     </div>
 
@@ -564,56 +570,40 @@
         showSlide(index);
     </script>
     <script>
-        const cars = [{
-                img: "https://suzukiindotrada.com/wp-content/uploads/2023/06/7-1.png",
-                name: "Toyota Avanza",
-                transmisi: "MT",
-                seater: 7,
-                harga: "Rp 230.000.000"
-            },
-            {
-                img: "https://suzukitrada.id/images/product/6b98c84edc24ae69692c7ae918f7d3a5.png?v=1.2.80",
-                name: "Honda Brio",
-                transmisi: "AT",
-                seater: 5,
-                harga: "Rp 180.000.000"
-            },
-            {
-                img: "https://umcsuzuki.com/storage/unit/main_image_20201223072035.png",
-                name: "Mitsubishi Xpander",
-                transmisi: "AT",
-                seater: 7,
-                harga: "Rp 270.000.000"
-            },
-            {
-                img: "https://omnispace.blob.core.windows.net/strapi-prod/2022-09-19/TRAC_MVP_Car_Suzuki_Ertiga_2_60affec33c.png",
-                name: "Suzuki Ertiga",
-                transmisi: "MT",
-                seater: 7,
-                harga: "Rp 240.000.000"
-            },
-        ];
-
+        const cars = @json($products);
+        const storageUrl = "{{ asset('storage') }}";
         const track = document.getElementById('carousel-track');
 
         let windowStart = 0;
+
+        console.log(cars);
 
         function getVisibleCards() {
             return window.innerWidth < 768 ? 1 : 5;
         }
 
+        function rp(harga) {
+            const rupiah = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(harga);
+
+            return rupiah;
+        }
+
         function renderCarousel() {
-            const visibleCards = getVisibleCards();
+            const visibleCards = Math.min(getVisibleCards(), cars.length);
             track.innerHTML = '';
             for (let i = 0; i < visibleCards; i++) {
                 let index = (windowStart + i) % cars.length;
                 const car = cars[index];
+                const imageCar = storageUrl + '/' + car.main_image.image;
                 const card = document.createElement('div');
                 card.classList.add('card');
                 if (i === Math.floor(visibleCards / 2)) card.classList.add('active');
                 card.style.marginRight = '5px'; // <-- tambahkan ini
                 card.innerHTML = `
-            <img class="mb-2" src="${car.img}" alt="${car.name}">
+            <img class="mb-2" src="${imageCar}" alt="${car.name}">
             <h3 class="font-semibold text-gray-700">${car.name}</h3>
             <p class="flex items-center text-gray-600 text-xs">
                 <span class="flex items-center gap-1">
@@ -621,7 +611,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
                     </svg>
 
-                    ${car.transmisi}
+                    ${car.cc}
                 </span>
                 <span class="flex items-center gap-1 ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -631,7 +621,7 @@
                 </span>
             </p>
             <p class="text-xs mt-3 text-gray-600">Mulai Dari</p>   
-            <p class="font-bold text-sm text-red-600">${car.harga}</p>
+            <p class="font-bold text-sm text-red-600">${rp(car.types_min_price)}</p>
         `;
                 track.appendChild(card);
             }

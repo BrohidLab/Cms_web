@@ -4,11 +4,14 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\ConsultationController;
+use App\Http\Controllers\Admin\HomePagesController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('pages.website.home');
-})->name('web-home');
+Route::get('/', [HomeController::class, 'index'])->name('web-home');
+Route::post('/konsultasi', [HomeController::class, 'konsultasi'])->name('konsultasi.store');
 
 
 Route::get('/user-admin', [AuthController::class, 'index']);
@@ -65,5 +68,28 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [ArticleController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [ArticleController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [ArticleController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('front-pages')->name('front_page.')->group(function () {
+        
+        /*HomePage*/
+        Route::get('/home-pages',[HomePagesController::class ,'index'])->name('homes.index');
+        Route::get('/home-pages/upload',[HomePagesController::class ,'upload'])->name('homes.upload');
+        Route::post('/home-pages/store',[HomePagesController::class ,'simpan'])->name('homes.store');
+        
+    });
+
+    Route::prefix('user-admin/testimoni')->name('testimoni.')->group(function () {
+        Route::get('/',[TestimonialController::class ,'index'])->name('index');
+        Route::get('/tambah-ulasan',[TestimonialController::class ,'create'])->name('create');        
+        Route::post('/create-ulasan',[TestimonialController::class ,'store'])->name('store');        
+        Route::get('/testimonial/{id}/edit', [TestimonialController::class,'edit'])->name('edit');
+        Route::put('/testimonial/{id}/update', [TestimonialController::class,'update'])->name('update');
+        Route::delete('/testimonial/{id}/delete', [TestimonialController::class,'destroy'])->name('delete');
+    });
+
+    Route::prefix('user-admin/Konsultasi')->name('konsultasi.')->group(function () {
+        Route::get('/',[ConsultationController::class ,'index'])->name('index');
+        
     });
 });

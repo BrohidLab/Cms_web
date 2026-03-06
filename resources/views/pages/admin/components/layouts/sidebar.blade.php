@@ -24,6 +24,17 @@
                 Dashboard
             </a>
 
+            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+                <span class="material-symbols-outlined text-lg">analytics</span>
+                Analytics
+            </a>
+        </div>
+
+        <p class="text-[11px] font-semibold text-gray-400 uppercase mt-5 mb-2 px-2">
+            Layout
+        </p>
+
+        <div class="space-y-1">
             <!-- Dropdown USERS -->
             <div>
                 <button onclick="toggleMenu('usersMenu', this)"
@@ -36,7 +47,8 @@
                 </button>
 
                 <div id="usersMenu" class="hidden pl-4 mt-1 space-y-1 text-gray-500">
-                    <a href="#" class="block w-full flex items-center py-1 hover:text-indigo-600">
+                    <a href="{{ route('front_page.homes.index') }}"
+                        class="block w-full flex items-center py-1 hover:text-indigo-600">
                         <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
                         Home Pages
                     </a>
@@ -50,18 +62,6 @@
                     </a>
                 </div>
             </div>
-
-            <a href="{{ route('product.index') }}"
-                class="flex items-center gap-3 px-3 py-2 rounded-md {{ request()->routeIs('product.index') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-indigo-50' }}">
-                <span class="material-symbols-outlined text-lg">directions_car</span>
-                Products
-            </a>
-            <a href="{{ route('article.index') }}"
-                class="flex items-center gap-3 px-3 py-2 roundes-md {{ request()->routeIs('article.index') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }} hover:bg-gray-100">
-                <span class="material-symbols-outlined text-lg">book</span>
-                Artikel
-            </a>
-
         </div>
 
         <!-- MANAGEMENT -->
@@ -71,27 +71,38 @@
 
         <div class="space-y-1">
 
-            <!-- Dropdown ORDERS -->
-            <div>
-                <button onclick="toggleMenu('ordersMenu', this)"
-                    class="w-full flex items-center justify-between px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-lg">receipt_long</span>
-                        Orders
-                    </div>
-                    <span class="material-symbols-outlined text-base">expand_more</span>
-                </button>
+            <a href="{{ route('product.index') }}"
+                class="flex items-center gap-3 px-3 py-2 rounded-md {{ request()->routeIs('product.*') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-indigo-50' }}">
+                <span class="material-symbols-outlined text-lg">directions_car</span>
+                Products
+            </a>
+            <a href="{{ route('article.index') }}"
+                class="flex items-center gap-3 px-3 py-2 roundes-md {{ request()->routeIs('article.*') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }} hover:bg-gray-100">
+                <span class="material-symbols-outlined text-lg">book</span>
+                Artikel
+            </a>
+            <a href="{{ route('testimoni.index') }}"
+                class="flex items-center gap-3 px-3 py-2 roundes-md {{ request()->routeIs('testimoni.*') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }} hover:bg-gray-100">
+                <span class="material-symbols-outlined text-lg">people</span>
+                Testimoni
+            </a>
 
-                <div id="ordersMenu" class="hidden pl-10 mt-1 space-y-1 text-gray-500">
-                    <a href="#" class="block py-1 hover:text-indigo-600">All Orders</a>
-                    <a href="#" class="block py-1 hover:text-indigo-600">Pending</a>
-                    <a href="#" class="block py-1 hover:text-indigo-600">Completed</a>
+            <a href="{{ route('konsultasi.index') }}"
+                class="flex items-center justify-between px-3 py-2 rounded-md
+{{ request()->routeIs('konsultasi.*') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }}
+hover:bg-gray-100">
+
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-lg">chat</span>
+                    Konsultasi
                 </div>
-            </div>
 
-            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
-                <span class="material-symbols-outlined text-lg">analytics</span>
-                Analytics
+                @if (unreadConsultations() > 0)
+                    <span class="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full">
+                        {{ unreadConsultations() }}
+                    </span>
+                @endif
+
             </a>
 
         </div>

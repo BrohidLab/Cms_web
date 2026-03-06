@@ -38,4 +38,14 @@ class Product extends Model
         return $this->hasOne(ProductImage::class)
                     ->where('is_main', true);
     }
+
+    public function testimonials()
+    {
+        return $this->hasMany(Testimonial::class);
+    }
+
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class);
+    }
 }
