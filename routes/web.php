@@ -8,11 +8,24 @@ use App\Http\Controllers\Admin\ConsultationController;
 use App\Http\Controllers\Admin\HomePagesController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Website\AboutController;
+use App\Http\Controllers\Website\ProductPageController;
+use App\Http\Controllers\Website\ServicePageController;
+use App\Http\Controllers\Website\SukuCadangPageController;
+use App\Http\Controllers\Website\ArticlePageController;
+use App\Http\Controllers\Website\ContactPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('web-home');
 Route::post('/konsultasi', [HomeController::class, 'konsultasi'])->name('konsultasi.store');
-
+Route::get('/tentang-kami', [AboutController::class, 'index'])->name('tentang_kami');
+Route::get('/product', [ProductPageController::class, 'index'])->name('website.product');
+Route::get('/service', [ServicePageController::class, 'index'])->name('website.service');
+Route::get('/suku-cadang', [SukuCadangPageController::class, 'index'])->name('website.suku_cadang.index');
+Route::post('/suku-cadang/konsultasi',[SukuCadangPageController::class, 'konsultasi'])->name('website.suku_cadang.consultation');
+Route::get('/artikel',[ArticlePageController::class,'index'])->name('website.article.index');
+Route::get('/artikel/{slug}',[ArticlePageController::class,'show'])->name('website.article.show');
+Route::get('/kontak-kami', [ContactPageController::class, 'index'])->name('website.contact');
 
 Route::get('/user-admin', [AuthController::class, 'index']);
 Route::get('/user-admin/register', [AuthController::class, 'register'])->name('register_user');

@@ -8,29 +8,29 @@
                 class="{{ request()->routeIs('web-home') ? 'text-white font-bold' : 'text-gray-500 hover:text-white' }}">
                 Home
             </a>
-            <a href="#"
-                class="{{ request()->routeIs('produk') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
+            <a href="{{route('tentang_kami')}}"
+                class="{{ request()->routeIs('tentang_kami') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Tentang Kami
             </a>
-            <a href="#"
-                class="{{ request()->routeIs('promo') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
+            <a href="{{route('website.product')}}"
+                class="{{ request()->routeIs('website.product') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Produk
             </a>
 
-            <a href="#"
-                class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
+            <a href="{{route('website.service')}}"
+                class="{{ request()->routeIs('website.service') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Service
             </a>
-            <a href="#"
-                class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
+            <a href="{{route('website.suku_cadang.index')}}"
+                class="{{ request()->routeIs('website.suku_cadang.index') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Suku Cadang
             </a>
-            <a href="#"
-                class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
+            <a href="{{route('website.article.index')}}"
+                class="{{ request()->routeIs('website.article.*') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Berita
             </a>
-            <a href="#"
-                class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
+            <a href="{{route('website.contact')}}"
+                class="{{ request()->routeIs('website.contact') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Kontak
             </a>
 
