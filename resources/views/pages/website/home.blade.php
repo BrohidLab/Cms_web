@@ -94,7 +94,7 @@
             </div>
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-                <div
+                <a href="#konsultasi"
                     class="rounded-xl shadow-sm hover:shadow-md border border-gray-300 transition p-4 flex items-center justify-center flex-col">
                     <div class="p-5 rounded-full bg-gray-200 mb-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -104,7 +104,7 @@
                         </svg>
                     </div>
                     <p class="text-gray-500 text-xs md:text-sm mt-1 text-center font-bold">Hubungkan dengan Sales</p>
-                </div>
+                </a>
                 <div
                     class="rounded-xl shadow-sm hover:shadow-md border border-gray-300 transition p-4 flex items-center justify-center flex-col">
                     <div class="p-5 rounded-full bg-gray-200 mb-3">
@@ -174,25 +174,7 @@
                 Kumpulan informasi terbaru dari Suzuki hingga tips dan trik berkendara ada
                 disini.
             </span>
-            @php
-                $news = [
-                    [
-                        'image' => 'https://picsum.photos/400/250?1',
-                        'title' => 'Teknologi AI Semakin Berkembang',
-                        'excerpt' => 'Perkembangan AI semakin pesat dan mulai diterapkan di berbagai sektor industri.',
-                    ],
-                    [
-                        'image' => 'https://picsum.photos/400/250?2',
-                        'title' => 'Startup Indonesia Mendunia',
-                        'excerpt' => 'Banyak startup lokal mulai dilirik investor luar negeri karena inovasinya.',
-                    ],
-                    [
-                        'image' => 'https://picsum.photos/400/250?3',
-                        'title' => 'Tren Digital Marketing 2026',
-                        'excerpt' => 'Strategi marketing kini beralih ke pendekatan berbasis data dan AI.',
-                    ],
-                ];
-            @endphp
+
             <div class="hidden md:grid grid-cols-3 gap-5 mt-7">
                 @foreach ($article as $item)
                     <div class="bg-white rounded-xl shadow">
@@ -262,30 +244,7 @@
                 </button>
             </div>
         </div>
-
-        @php
-            $testimonies = collect([
-                (object) [
-                    'image' => 'https://picsum.photos/400/300?1',
-                    'car' => 'Toyota Avanza',
-                    'name' => 'Budi Santoso',
-                    'message' => 'Pelayanan sangat memuaskan, proses cepat dan mobil sesuai harapan.',
-                ],
-                (object) [
-                    'image' => 'https://picsum.photos/400/300?2',
-                    'car' => 'Suzuki XL7',
-                    'name' => 'Andi Wijaya',
-                    'message' => 'Sales ramah dan membantu sekali dalam memilih mobil yang tepat.',
-                ],
-                (object) [
-                    'image' => 'https://picsum.photos/400/300?3',
-                    'car' => 'Honda Brio',
-                    'name' => 'Rina Kartika',
-                    'message' => 'Pengalaman beli mobil terbaik, proses tidak ribet sama sekali.',
-                ],
-            ]);
-        @endphp
-        <section class="py-10 bg-gray-50">
+        <section class="py-10 bg-gray-50 w-full">
             <div class="text-center">
 
                 <h2 class="text-2xl md:text-3xl text-gray-800 font-bold mb-10">
@@ -297,24 +256,24 @@
                     {{-- SLIDER --}}
                     <div id="testiContainer" class="flex overflow-x-hidden">
 
-                        @foreach ($testimonies as $item)
+                        @foreach ($testimonials as $item)
                             <div class="min-w-full px-4">
 
                                 <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 max-w-xl mx-auto">
 
-                                    <img src="{{ $item->image }}"
+                                    <img src="{{ asset('storage/' . $item->image) }}"
                                         class="w-20 h-20 rounded-full object-cover mx-auto mb-4">
 
                                     <h3 class="font-semibold text-lg">
-                                        {{ $item->name }}
+                                        {{ $item->nama_pelanggan }}
                                     </h3>
 
                                     <p class="text-sm text-gray-500 mb-3">
-                                        Pembeli {{ $item->car }}
+                                        Pembeli {{ $item->product->name }}
                                     </p>
 
                                     <p class="text-gray-600 italic">
-                                        "{{ $item->message }}"
+                                        "{{ $item->ulasan }}"
                                     </p>
 
                                 </div>
@@ -344,7 +303,7 @@
             </div>
 
         </section>
-        <section class="py-20 bg-white w-full">
+        <section id="konsultasi" class="py-20 bg-white w-full">
 
             <div class="px-4 md:px-8 lg:px-32">
 

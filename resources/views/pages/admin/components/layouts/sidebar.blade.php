@@ -38,7 +38,7 @@
             <!-- Dropdown USERS -->
             <div>
                 <button onclick="toggleMenu('usersMenu', this)"
-                    class="w-full flex items-center justify-between px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+                    class="w-full flex items-center justify-between px-3 py-2 rounded-md {{ request()->routeIs('front_page.*') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }} hover:bg-gray-100">
                     <div class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-lg">view_quilt</span>
                         Front Pages
@@ -46,19 +46,42 @@
                     <span class="material-symbols-outlined text-base">expand_more</span>
                 </button>
 
-                <div id="usersMenu" class="hidden pl-4 mt-1 space-y-1 text-gray-500">
+                <div id="usersMenu"
+                    class="{{ request()->routeIs('front_page.*') ? '' : 'hidden' }} pl-4 mt-1 space-y-1 text-gray-500">
                     <a href="{{ route('front_page.homes.index') }}"
-                        class="block w-full flex items-center py-1 hover:text-indigo-600">
+                        class="block w-full flex items-center py-1 {{ request()->routeIs('front_page.homes.*') ? 'text-indigo-600 font-medium' : 'text-gray-600' }} hover:text-indigo-600">
                         <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
                         Home Pages
                     </a>
-                    <a href="#" class="block py-1 flex items-center hover:text-indigo-600">
+                    <a href="{{ route('front_page.about.index') }}"
+                        class="block py-1 flex items-center {{ request()->routeIs('front_page.about.*') ? 'text-indigo-600 font-medium' : 'text-gray-600' }} hover:text-indigo-600">
                         <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
-                        Roles
+                        About Pages
                     </a>
-                    <a href="#" class="block py-1 flex items-center hover:text-indigo-600">
+                    <a href="{{ route('front_page.product.index') }}"
+                        class="block py-1 flex items-center {{ request()->routeIs('front_page.product.*') ? 'text-indigo-600 font-medium' : 'text-gray-600' }} hover:text-indigo-600">
                         <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
-                        Permissions
+                        Product Pages
+                    </a>
+                    <a href="{{ route('front_page.service.index') }}"
+                        class="block py-1 flex items-center {{ request()->routeIs('front_page.service.*') ? 'text-indigo-600 font-medium' : 'text-gray-600' }} hover:text-indigo-600">
+                        <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
+                        Service Pages
+                    </a>
+                    <a href="{{ route('front_page.suku_cadang.index') }}"
+                        class="block py-1 flex items-center {{ request()->routeIs('front_page.suku_cadang.*') ? 'text-indigo-600 font-medium' : 'text-gray-600' }} hover:text-indigo-600">
+                        <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
+                        Suku Cadang Pages
+                    </a>
+                    <a href="{{ route('front_page.berita.index') }}"
+                        class="block py-1 flex items-center {{ request()->routeIs('front_page.berita.*') ? 'text-indigo-600 font-medium' : 'text-gray-600' }} hover:text-indigo-600">
+                        <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
+                        Berita Pages
+                    </a>
+                    <a href="{{ route('front_page.kontak.index') }}"
+                        class="block py-1 flex items-center {{ request()->routeIs('front_page.kontak.*') ? 'text-indigo-600 font-medium' : 'text-gray-600' }} hover:text-indigo-600">
+                        <span class="material-symbols-outlined text-sm mr-4">arrow_right</span>
+                        Kontak Pages
                     </a>
                 </div>
             </div>

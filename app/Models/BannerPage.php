@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BannerPage extends Model
 {
-    protected $fillable = ['title','image', 'pages_name'];
+    protected $fillable = ['title', 'sub_title','image', 'pages_name'];
     
     public $incrementing = false;
     protected $keyType = 'string';

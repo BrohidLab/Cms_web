@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutPagesController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
@@ -70,13 +71,36 @@ Route::middleware('auth')->group(function () {
         Route::delete('delete/{id}', [ArticleController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('front-pages')->name('front_page.')->group(function () {
+    Route::prefix('user-admin/front-pages')->name('front_page.')->group(function () {
         
         /*HomePage*/
         Route::get('/home-pages',[HomePagesController::class ,'index'])->name('homes.index');
         Route::get('/home-pages/upload',[HomePagesController::class ,'upload'])->name('homes.upload');
         Route::post('/home-pages/store',[HomePagesController::class ,'simpan'])->name('homes.store');
         
+        /*About Me */
+        Route::get('/about-pages',[AboutPagesController::class ,'index'])->name('about.index');
+        Route::post('/about-pages',[AboutPagesController::class ,'update'])->name('about.update');
+
+        /*product*/
+        Route::get('/product-pages',[AboutPagesController::class ,'prodindex'])->name('product.index');
+        Route::post('/product-pages',[AboutPagesController::class ,'produpdate'])->name('product.update');
+
+        /*service*/
+        Route::get('/service-pages',[AboutPagesController::class ,'serviceindex'])->name('service.index');
+        Route::post('/service-pages',[AboutPagesController::class ,'serviceupdate'])->name('service.update');
+
+        /*suku_cadang*/
+        Route::get('/suku-cadang-pages',[AboutPagesController::class ,'cadangindex'])->name('suku_cadang.index');
+        Route::post('/suku-cadang-pages',[AboutPagesController::class ,'cadangupdate'])->name('suku_cadang.update');
+
+        /*berita*/
+        Route::get('/berita-pages',[AboutPagesController::class ,'beritaindex'])->name('berita.index');
+        Route::post('/berita-pages',[AboutPagesController::class ,'beritaupdate'])->name('berita.update');
+
+        /*kontak*/
+        Route::get('/kontak-pages',[AboutPagesController::class ,'kontakindex'])->name('kontak.index');
+        Route::post('/kontak-pages',[AboutPagesController::class ,'kontakupdate'])->name('kontak.update');
     });
 
     Route::prefix('user-admin/testimoni')->name('testimoni.')->group(function () {
