@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\BannerPage;
 
 class AboutController extends Controller
 {
     public function index(){
-    	return view('pages.website.about');
+        $banner = BannerPage::where('pages_name', 'about')
+            ->orderBy('id', 'desc')
+            ->first();
+    	return view('pages.website.about', compact('banner'));
     }
 }

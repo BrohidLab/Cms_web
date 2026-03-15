@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\BannerPage;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,16 @@ class ProductPageController extends Controller
     	                    ->withMin('types', 'price')
     	                    ->latest();
     	
-    	    if($request->search){
-    	        $products->where('name','like','%'.$request->search.'%');
-    	    }
-    	
-    	    $products = $products->paginate(12);
-    	return view('pages.website.product.index', compact('products'));
+		if($request->search){
+			$products->where('name','like','%'.$request->search.'%');
+		}
+	
+		$products = $products->paginate(12);
+
+		$banner = BannerPage::where('pages_name', 'product')
+					->orderBy('id', 'desc')
+					->first();
+
+    	return view('pages.website.product.index', compact('products', 'banner'));
     }
 }

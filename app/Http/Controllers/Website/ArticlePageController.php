@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\BannerPage;
 use App\Models\ContentLabel;
 use Illuminate\Http\Request;
 
@@ -24,12 +25,15 @@ class ArticlePageController extends Controller
         $labels = ContentLabel::all();
     
         $trending = Article::latest()->take(5)->get();
-    
+        $banner = BannerPage::where('pages_name', 'berita')
+					->orderBy('id', 'desc')
+					->first();    
         return view('pages.website.article.index', compact(
             'articles',
             'featured',
             'labels',
-            'trending'
+            'trending',
+            'banner'
         ));
     }
 
@@ -44,10 +48,14 @@ class ArticlePageController extends Controller
                     ->latest()
                     ->take(3)
                     ->get();
-    
+
+        $banner = BannerPage::where('pages_name', 'berita')
+					->orderBy('id', 'desc')
+					->first();          
         return view('pages.website.article.show', compact(
             'article',
-            'related'
+            'related',
+            'banner'
         ));
     }
 }

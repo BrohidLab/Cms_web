@@ -105,7 +105,7 @@
                     </div>
                     <p class="text-gray-500 text-xs md:text-sm mt-1 text-center font-bold">Hubungkan dengan Sales</p>
                 </a>
-                <div
+                <a href="{{ route('website.service') }}"
                     class="rounded-xl shadow-sm hover:shadow-md border border-gray-300 transition p-4 flex items-center justify-center flex-col">
                     <div class="p-5 rounded-full bg-gray-200 mb-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -116,18 +116,19 @@
 
                     </div>
                     <p class="text-gray-500 text-xs md:text-sm mt-1 font-bold text-center">Jadwal Services</p>
-                </div>
-                <div
+                </a>
+                <a href="{{ route('website.suku_cadang.index') }}"
                     class="rounded-xl shadow-sm hover:shadow-md border border-gray-300 transition p-4 flex items-center justify-center flex-col">
                     <div class="p-5 rounded-full bg-gray-200 mb-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-9">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                                d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
                         </svg>
+
                     </div>
-                    <p class="text-gray-500 text-xs md:text-sm mt-1 text-center font-bold">Hubungkan dengan Sales</p>
-                </div>
+                    <p class="text-gray-500 text-xs md:text-sm mt-1 text-center font-bold">Pesan Part</p>
+                </a>
                 <div
                     class="rounded-xl shadow-sm hover:shadow-md border border-gray-300 transition p-4 flex items-center justify-center flex-col">
                     <div class="p-5 rounded-full bg-gray-200 mb-3">
@@ -136,8 +137,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
                         </svg>
-
-
                     </div>
                     <p class="text-gray-500 text-xs md:text-sm mt-1 text-center font-bold">Simulasi Kredit</p>
                 </div>
@@ -163,9 +162,9 @@
             </button>
 
             <div class="flex justify-center mt-10">
-                <button class="bg-gray-800 text-white px-10 py-2 rounded-full text-sm">
+                <a href="{{ route('website.product') }}" class="bg-gray-800 text-white px-10 py-2 rounded-full text-sm">
                     Selengkapnya
-                </button>
+                </a>
             </div>
         </div>
         <div class="bg-white w-full px-4 md:px-8 lg:px-32 py-10 md:py-12">
@@ -180,15 +179,17 @@
                     <div class="bg-white rounded-xl shadow">
                         <img src="{{ asset('storage/' . $item->thumbnail) }}" class="w-full h-48 object-cover rounded-t-xl">
 
-                        <div class="p-4">
-                            <h3 class="font-semibold text-lg mb-2">
-                                {{ $item->title }}
-                            </h3>
+                        <a href="{{ route('website.article.show', $item->slug) }}">
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2">
+                                    {{ $item->title }}
+                                </h3>
 
-                            <div class="text-sm text-gray-500">
-                                {!! Str::limit($item->content, 100) !!}
+                                <div class="text-sm text-gray-500">
+                                    {!! Str::limit($item->content, 100) !!}
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -205,15 +206,17 @@
                                 <img src="{{ asset('storage/' . $item->thumbnail) }}"
                                     class="w-full h-48 object-cover rounded-t-xl">
 
-                                <div class="p-4">
-                                    <h3 class="font-semibold text-lg mb-2">
-                                        {{ $item->title }}
-                                    </h3>
+                                <a href="{{ route('website.article.show', $item->slug) }}">
+                                    <div class="p-4">
+                                        <h3 class="font-semibold text-lg mb-2">
+                                            {{ $item->title }}
+                                        </h3>
 
-                                    <p class="text-sm text-gray-500 mb-3">
-                                        {{ Str::limit($item->content, 100) }}
-                                    </p>
-                                </div>
+                                        <p class="text-sm text-gray-500 mb-3">
+                                            {{ Str::limit($item->content, 100) }}
+                                        </p>
+                                    </div>
+                                </a>
 
                             </div>
 
@@ -239,9 +242,10 @@
 
             </div>
             <div class="flex w-full justify-center mt-10">
-                <button class="text-sm bg-gray-800 text-white rounded-full px-10 py-2">
+                <a href="{{ route('website.article.index') }}"
+                    class="text-sm bg-gray-800 text-white rounded-full px-10 py-2">
                     Selengkapnya
-                </button>
+                </a>
             </div>
         </div>
         <section class="py-10 bg-gray-50 w-full">

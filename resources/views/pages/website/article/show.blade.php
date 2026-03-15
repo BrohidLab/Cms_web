@@ -1,158 +1,141 @@
 @extends('components.website.layouts.app')
 
 @section('content')
+    <x-website.banner title="{{ $banner->title ?? 'Berita' }}" description="{{ $banner->sub_title ?? '' }}"
+        image="{{ $banner && $banner->images
+            ? asset('storage/' . $banner->images)
+            : 'https://suzuki.co.id/themes/default/assets/images/suzuki-default-mobile.jpg' }}"
+        :breadcrumbs="[
+            ['label' => 'Home', 'url' => '/'],
+            ['label' => 'Berita', 'url' => route('website.article.index')],
+            ['label' => $article->title],
+        ]" />
 
-<x-website.banner
-    :title="$article->title"
-    :description="$article->excerpt"
-    :image="asset('storage/'.$article->thumbnail)"
-    :breadcrumbs="[
-        ['label' => 'Home', 'url' => '/'],
-        ['label' => 'Berita', 'url' => route('website.article.index')],
-        ['label' => $article->title]
-    ]"
-/>
+    <section class="bg-gray-50 py-20  relative z-10">
 
-<section class="bg-gray-50 py-20  relative z-10">
+        <div class="max-w-4xl mx-auto px-6">
 
-<div class="max-w-4xl mx-auto px-6">
+            <!-- LABEL -->
+            <div class="flex flex-wrap gap-2 mb-4">
 
-<!-- LABEL -->
-<div class="flex flex-wrap gap-2 mb-4">
+                @foreach ($article->labels as $label)
+                    <span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
 
-@foreach($article->labels as $label)
+                        {{ $label->name }}
 
-<span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                    </span>
+                @endforeach
 
-{{ $label->name }}
+            </div>
 
-</span>
 
-@endforeach
+            <!-- META -->
 
-</div>
+            <div class="text-sm text-gray-400 mb-8">
 
+                {{ $article->created_at->format('d M Y') }}
 
-<!-- META -->
+            </div>
 
-<div class="text-sm text-gray-400 mb-8">
 
-{{ $article->created_at->format('d M Y') }}
+            <!-- IMAGE -->
 
-</div>
+            @if ($article->image)
+                <img src="{{ asset('storage/' . $article->image) }}" class="rounded-xl mb-8 w-full">
+            @endif
 
 
-<!-- IMAGE -->
+            <!-- CONTENT -->
 
-@if($article->image)
+            <div class="prose max-w-none">
 
-<img
-src="{{ asset('storage/'.$article->image) }}"
-class="rounded-xl mb-8 w-full">
+                {!! $article->content !!}
 
-@endif
+            </div>
 
 
-<!-- CONTENT -->
+            <!-- SHARE -->
 
-<div class="prose max-w-none">
+            <div class="mt-12 border-t pt-6">
 
-{!! $article->content !!}
+                <h3 class="font-semibold mb-4">
 
-</div>
+                    Bagikan Artikel
 
+                </h3>
 
-<!-- SHARE -->
+                <div class="flex gap-3">
 
-<div class="mt-12 border-t pt-6">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}"
+                        class="px-4 py-2 bg-blue-600 text-white rounded">
 
-<h3 class="font-semibold mb-4">
+                        Facebook
 
-Bagikan Artikel
+                    </a>
 
-</h3>
+                    <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}"
+                        class="px-4 py-2 bg-sky-500 text-white rounded">
 
-<div class="flex gap-3">
+                        Twitter
 
-<a
-href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}"
-class="px-4 py-2 bg-blue-600 text-white rounded">
+                    </a>
 
-Facebook
+                    <a href="https://wa.me/?text={{ url()->current() }}" class="px-4 py-2 bg-green-500 text-white rounded">
 
-</a>
+                        WhatsApp
 
-<a
-href="https://twitter.com/intent/tweet?url={{ url()->current() }}"
-class="px-4 py-2 bg-sky-500 text-white rounded">
+                    </a>
 
-Twitter
+                </div>
 
-</a>
+            </div>
 
-<a
-href="https://wa.me/?text={{ url()->current() }}"
-class="px-4 py-2 bg-green-500 text-white rounded">
+        </div>
 
-WhatsApp
 
-</a>
+        <!-- RELATED ARTICLE -->
 
-</div>
+        <div class="max-w-7xl mx-auto px-6 mt-20">
 
-</div>
+            <h2 class="text-2xl font-semibold mb-10">
 
-</div>
+                Artikel Terkait
 
+            </h2>
 
-<!-- RELATED ARTICLE -->
+            <div class="grid md:grid-cols-3 gap-8">
 
-<div class="max-w-7xl mx-auto px-6 mt-20">
+                @foreach ($related as $item)
+                    <article class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
 
-<h2 class="text-2xl font-semibold mb-10">
+                        <img src="{{ asset('storage/' . $item->thumbnail) }}" class="h-48 w-full object-cover">
 
-Artikel Terkait
+                        <div class="p-5">
 
-</h2>
+                            <h3 class="font-semibold mb-2">
 
-<div class="grid md:grid-cols-3 gap-8">
+                                <a href="{{ route('website.article.show', $item->slug) }}">
 
-@foreach($related as $item)
+                                    {{ $item->title }}
 
-<article class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+                                </a>
 
-<img
-src="{{ asset('storage/'.$item->thumbnail) }}"
-class="h-48 w-full object-cover">
+                            </h3>
 
-<div class="p-5">
+                            <p class="text-sm text-gray-600 line-clamp-2">
 
-<h3 class="font-semibold mb-2">
+                                {{ $item->excerpt }}
 
-<a href="{{ route('website.article.show',$item->slug) }}">
+                            </p>
 
-{{ $item->title }}
+                        </div>
 
-</a>
+                    </article>
+                @endforeach
 
-</h3>
+            </div>
 
-<p class="text-sm text-gray-600 line-clamp-2">
+        </div>
 
-{{ $item->excerpt }}
-
-</p>
-
-</div>
-
-</article>
-
-@endforeach
-
-</div>
-
-</div>
-
-</section>
-
+    </section>
 @endsection

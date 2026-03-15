@@ -1,236 +1,216 @@
 @extends('components.website.layouts.app')
 
 @section('content')
+    <x-website.banner title="{{ $banner->title ?? 'Hubungi Kami' }}" description="{{ $banner->sub_title ?? '' }}"
+        image="{{ $banner && $banner->images
+            ? asset('storage/' . $banner->images)
+            : 'https://suzuki.co.id/themes/default/assets/images/suzuki-default-mobile.jpg' }}"
+        :breadcrumbs="[['label' => 'Home', 'url' => '/'], ['label' => 'Kontak Kami']]" />
 
-<x-website.banner
-    title="Kontak Kami"
-    description="Hubungi tim kami untuk informasi lebih lanjut mengenai layanan dan produk kami."
-    image="https://images.unsplash.com/photo-1521791136064-7986c2920216"
-    :breadcrumbs="[
-        ['label' => 'Home', 'url' => '/'],
-        ['label' => 'Kontak Kami']
-    ]"
-/>
 
+    <section class="bg-gray-50 py-10 relative z-10">
 
-<section class="bg-gray-50 py-10 relative z-10">
+        <div class="max-w-7xl mx-auto px-10">
 
-<div class="max-w-7xl mx-auto px-10">
+            <div class="grid md:grid-cols-5 gap-10">
 
-<div class="grid md:grid-cols-5 gap-10">
+                <!-- INFORMASI KONTAK -->
 
-<!-- INFORMASI KONTAK -->
+                <div class="md:col-span-2 space-y-6">
 
-<div class="md:col-span-2 space-y-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+                        Hubungi Kami
+                    </h2>
 
-<h2 class="text-2xl font-semibold text-gray-800 mb-4">
-Hubungi Kami
-</h2>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Jika Anda memiliki pertanyaan mengenai layanan, produk, atau membutuhkan bantuan,
+                        silakan hubungi kami melalui informasi kontak berikut atau isi form di samping.
+                    </p>
 
-<p class="text-gray-600 text-sm leading-relaxed">
-Jika Anda memiliki pertanyaan mengenai layanan, produk, atau membutuhkan bantuan, 
-silakan hubungi kami melalui informasi kontak berikut atau isi form di samping.
-</p>
 
+                    <!-- ADDRESS -->
 
-<!-- ADDRESS -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
 
-<div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h4 class="font-semibold mb-2">
+                            Alamat
+                        </h4>
 
-<h4 class="font-semibold mb-2">
-Alamat
-</h4>
+                        <p class="text-sm text-gray-600">
+                            Jl. Contoh Alamat No.123<br>
+                            Jakarta, Indonesia
+                        </p>
 
-<p class="text-sm text-gray-600">
-Jl. Contoh Alamat No.123<br>
-Jakarta, Indonesia
-</p>
+                    </div>
 
-</div>
 
+                    <!-- PHONE -->
 
-<!-- PHONE -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
 
-<div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h4 class="font-semibold mb-2">
+                            Telepon
+                        </h4>
 
-<h4 class="font-semibold mb-2">
-Telepon
-</h4>
+                        <p class="text-sm text-gray-600">
+                            +62 812 3456 7890
+                        </p>
 
-<p class="text-sm text-gray-600">
-+62 812 3456 7890
-</p>
+                    </div>
 
-</div>
 
+                    <!-- EMAIL -->
 
-<!-- EMAIL -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
 
-<div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h4 class="font-semibold mb-2">
+                            Email
+                        </h4>
 
-<h4 class="font-semibold mb-2">
-Email
-</h4>
+                        <p class="text-sm text-gray-600">
+                            info@perusahaan.com
+                        </p>
 
-<p class="text-sm text-gray-600">
-info@perusahaan.com
-</p>
+                    </div>
 
-</div>
 
+                    <!-- WHATSAPP -->
 
-<!-- WHATSAPP -->
+                    <div class="bg-blue-600 text-white p-6 rounded-xl">
 
-<div class="bg-blue-600 text-white p-6 rounded-xl">
+                        <h4 class="font-semibold mb-2">
+                            Butuh Respon Cepat?
+                        </h4>
 
-<h4 class="font-semibold mb-2">
-Butuh Respon Cepat?
-</h4>
+                        <p class="text-sm mb-4">
+                            Hubungi kami langsung melalui WhatsApp.
+                        </p>
 
-<p class="text-sm mb-4">
-Hubungi kami langsung melalui WhatsApp.
-</p>
+                        <a href="https://wa.me/628123456789"
+                            class="inline-block bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">
 
-<a
-href="https://wa.me/628123456789"
-class="inline-block bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">
+                            Chat WhatsApp
 
-Chat WhatsApp
+                        </a>
 
-</a>
+                    </div>
 
-</div>
+                </div>
 
-</div>
 
 
+                <!-- FORM KONTAK -->
 
-<!-- FORM KONTAK -->
+                <div class="md:col-span-3">
 
-<div class="md:col-span-3">
+                    <div class="bg-white p-8 rounded-xl shadow-md">
 
-<div class="bg-white p-8 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold mb-6">
+                            Kirim Pesan
+                        </h3>
 
-<h3 class="text-xl font-semibold mb-6">
-Kirim Pesan
-</h3>
+                        <form method="POST" action="#" class="space-y-5">
 
-<form method="POST" action="#" class="space-y-5">
+                            @csrf
 
-@csrf
+                            <div class="grid md:grid-cols-2 gap-5">
 
-<div class="grid md:grid-cols-2 gap-5">
+                                <div>
 
-<div>
+                                    <label class="text-sm text-gray-600">
+                                        Nama Lengkap
+                                    </label>
 
-<label class="text-sm text-gray-600">
-Nama Lengkap
-</label>
+                                    <input type="text" name="name"
+                                        class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
 
-<input
-type="text"
-name="name"
-class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
 
-</div>
 
+                                <div>
 
-<div>
+                                    <label class="text-sm text-gray-600">
+                                        Email
+                                    </label>
 
-<label class="text-sm text-gray-600">
-Email
-</label>
+                                    <input type="email" name="email"
+                                        class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
 
-<input
-type="email"
-name="email"
-class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
 
-</div>
+                            </div>
 
-</div>
 
+                            <div>
 
-<div>
+                                <label class="text-sm text-gray-600">
+                                    Nomor Telepon
+                                </label>
 
-<label class="text-sm text-gray-600">
-Nomor Telepon
-</label>
+                                <input type="text" name="phone"
+                                    class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
 
-<input
-type="text"
-name="phone"
-class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
 
-</div>
 
+                            <div>
 
-<div>
+                                <label class="text-sm text-gray-600">
+                                    Subjek
+                                </label>
 
-<label class="text-sm text-gray-600">
-Subjek
-</label>
+                                <input type="text" name="subject"
+                                    class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
 
-<input
-type="text"
-name="subject"
-class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
 
-</div>
 
+                            <div>
 
-<div>
+                                <label class="text-sm text-gray-600">
+                                    Pesan
+                                </label>
 
-<label class="text-sm text-gray-600">
-Pesan
-</label>
+                                <textarea name="message" rows="4"
+                                    class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
 
-<textarea
-name="message"
-rows="4"
-class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                            </div>
 
-</div>
 
+                            <button
+                                class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">
 
-<button
-class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+                                Kirim Pesan
 
-Kirim Pesan
+                            </button>
 
-</button>
+                        </form>
 
-</form>
+                    </div>
 
-</div>
+                </div>
 
-</div>
+            </div>
 
-</div>
+        </div>
+    </section>
 
-</div>
-</section>
 
+    <!-- GOOGLE MAP -->
 
-<!-- GOOGLE MAP -->
+    <section class="pb-20 bg-gray-50">
 
-<section class="pb-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
 
-<div class="max-w-7xl mx-auto px-6">
+            <div class="rounded-xl overflow-hidden shadow">
 
-<div class="rounded-xl overflow-hidden shadow">
+                <iframe src="https://www.google.com/maps?q=jakarta&output=embed" class="w-full h-[400px]" allowfullscreen=""
+                    loading="lazy">
+                </iframe>
 
-<iframe
-src="https://www.google.com/maps?q=jakarta&output=embed"
-class="w-full h-[400px]"
-allowfullscreen=""
-loading="lazy">
-</iframe>
+            </div>
 
-</div>
+        </div>
 
-</div>
-
-</section>
-
+    </section>
 @endsection
