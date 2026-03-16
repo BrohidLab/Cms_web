@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutPagesController;
+use App\Http\Controllers\Admin\AnalyticController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ConsultationController;
 use App\Http\Controllers\Admin\HomePagesController;
+use App\Http\Controllers\Admin\ProfileWebController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\AboutController;
@@ -21,6 +23,7 @@ Route::get('/', [HomeController::class, 'index'])->name('web-home');
 Route::post('/konsultasi', [HomeController::class, 'konsultasi'])->name('konsultasi.store');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('tentang_kami');
 Route::get('/product', [ProductPageController::class, 'index'])->name('website.product');
+Route::get('/product/{slg}', [ProductPageController::class, 'show'])->name('website.product.show');
 Route::get('/service', [ServicePageController::class, 'index'])->name('website.service');
 Route::get('/suku-cadang', [SukuCadangPageController::class, 'index'])->name('website.suku_cadang.index');
 Route::post('/suku-cadang/konsultasi',[SukuCadangPageController::class, 'konsultasi'])->name('website.suku_cadang.consultation');
@@ -35,6 +38,7 @@ Route::post('user-admin/logout',[AuthController::class,'logout'])->middleware('a
 
 Route::middleware('auth')->group(function () {
     Route::get('user-admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('user-admin/analytic', [AnalyticController::class, 'index'])->name('analytic');
 
     /*product*/
      Route::prefix('user-admin/product')->name('product.')->group(function () {
@@ -127,6 +131,11 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('user-admin/Konsultasi')->name('konsultasi.')->group(function () {
         Route::get('/',[ConsultationController::class ,'index'])->name('index');
+        
+    });
+    Route::prefix('user-admin/settings')->name('setting.')->group(function () {
+        Route::get('/',[ProfileWebController::class ,'index'])->name('index');
+        Route::post('/create',[ProfileWebController::class ,'store'])->name('store');
         
     });
 });

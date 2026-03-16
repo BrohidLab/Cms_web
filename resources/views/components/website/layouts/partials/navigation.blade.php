@@ -3,33 +3,33 @@
 
     <div class="w-full flex items-center justify-between">
 
-        <div class="hidden md:flex gap-6 text-sm">
+        <div class="hidden md:flex gap-4  text-sm text-center">
             <a href="{{ route('web-home') }}"
-                class="{{ request()->routeIs('web-home') ? 'text-white font-bold' : 'text-gray-500 hover:text-white' }}">
+                class="{{ request()->routeIs('web-home') ? 'text-white font-bold' : 'text-gray-400 hover:text-white' }}">
                 Home
             </a>
-            <a href="{{route('tentang_kami')}}"
+            <a href="{{ route('tentang_kami') }}"
                 class="{{ request()->routeIs('tentang_kami') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Tentang Kami
             </a>
-            <a href="{{route('website.product')}}"
+            <a href="{{ route('website.product') }}"
                 class="{{ request()->routeIs('website.product') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Produk
             </a>
 
-            <a href="{{route('website.service')}}"
+            <a href="{{ route('website.service') }}"
                 class="{{ request()->routeIs('website.service') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Service
             </a>
-            <a href="{{route('website.suku_cadang.index')}}"
+            <a href="{{ route('website.suku_cadang.index') }}"
                 class="{{ request()->routeIs('website.suku_cadang.index') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Suku Cadang
             </a>
-            <a href="{{route('website.article.index')}}"
+            <a href="{{ route('website.article.index') }}"
                 class="{{ request()->routeIs('website.article.*') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Berita
             </a>
-            <a href="{{route('website.contact')}}"
+            <a href="{{ route('website.contact') }}"
                 class="{{ request()->routeIs('website.contact') ? 'text-white border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white' }}">
                 Kontak
             </a>

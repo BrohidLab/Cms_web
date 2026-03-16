@@ -26,4 +26,23 @@ class ProductPageController extends Controller
 
     	return view('pages.website.product.index', compact('products', 'banner'));
     }
+
+	public function show($slug) {
+		$banner = BannerPage::where('pages_name', 'product')
+					->orderBy('id', 'desc')
+							->first();
+
+		$products = Product::with([
+            'mainImage:id,product_id,image,is_main',
+        ])
+            ->withMin('types', 'price') // ambil harga paling rendah
+            ->latest()
+            ->get();
+
+		$product = Product::with([
+									'types.colors.image',
+									'galleries'
+								])->where('slug',$slug)->firstOrFail();
+		return view('pages.website.product.show', compact('banner', 'product', 'products'));
+	}
 }

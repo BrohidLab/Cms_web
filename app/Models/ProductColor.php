@@ -25,8 +25,8 @@ class ProductColor extends Model
         return $this->belongsTo(ProductType::class, 'type_id');
     }
 
-    public function images(): BelongsTo
+    public function image()
     {
-        return $this->belongsTo(ProductImage::class, 'color_id');
+        return $this->hasOne(ProductImage::class, 'color_id');
     }
 }

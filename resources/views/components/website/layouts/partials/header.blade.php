@@ -2,15 +2,15 @@
 
     <!-- HEADER TOP -->
     <div id="header-top"
-        class="px-4 py-3 md:px-32 md:py-5 text-white bg-gray-700 flex items-center border-b border-gray-800 transition-all duration-300">
+        class="px-4 py-3 md:px-10 lg:px-20 md:py-5 text-white bg-gray-700 flex items-center border-b border-gray-800 transition-all duration-300">
 
         <!-- Logo -->
-        <div class="w-[140px] md:w-[240px]">
+        <div class="w-[140px] lg:w-[240px]">
             logo
         </div>
 
         <!-- MENU (hidden saat normal) -->
-        <div id="menu-inline" class="hidden w-[60%] flex-2 justify-center">
+        <div id="menu-inline" class="hidden w-[65%] flex-2 justify-center">
             @include('components.website.layouts.partials.navigation')
         </div>
 
@@ -33,7 +33,7 @@
     </div>
 
     <!-- MENU NORMAL -->
-    <div id="menu-bottom" class="px-4 md:px-32 py-3 bg-gray-700 border-b border-gray-800 transition-all duration-300">
+    <div id="menu-bottom" class="px-4 md:px-20 py-3 bg-gray-700 border-b border-gray-800 transition-all duration-300">
         @include('components.website.layouts.partials.navigation')
     </div>
 

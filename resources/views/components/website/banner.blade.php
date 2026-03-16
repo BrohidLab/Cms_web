@@ -27,7 +27,7 @@
     <!-- Breadcrumb -->
     <div class="bg-white border-b">
 
-        <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="w-full px-6 md:px-10 lg:px-20 py-4">
 
             <nav class="flex items-center text-sm text-gray-500 space-x-2">
 

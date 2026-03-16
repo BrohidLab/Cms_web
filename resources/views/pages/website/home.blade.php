@@ -566,15 +566,17 @@
                 if (i === Math.floor(visibleCards / 2)) card.classList.add('active');
                 card.style.marginRight = '5px'; // <-- tambahkan ini
                 card.innerHTML = `
+            <a href="/product/${car.slug}" class="w-full">
             <img class="mb-2" src="${imageCar}" alt="${car.name}">
-            <h3 class="font-semibold text-gray-700">${car.name}</h3>
-            <p class="flex items-center text-gray-600 text-xs">
+            <div class="flex flex-col justify-center">
+            <h3 class="font-semibold w-full  text-gray-700">${car.name}</h3>
+            <p class="flex items-center justify-center gap-2 text-gray-600 text-xs">
                 <span class="flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
                     </svg>
 
-                    ${car.cc}
+                    ${car.cc}cc
                 </span>
                 <span class="flex items-center gap-1 ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -583,8 +585,10 @@
                     ${car.seater} Seater
                 </span>
             </p>
+            </div>
             <p class="text-xs mt-3 text-gray-600">Mulai Dari</p>   
             <p class="font-bold text-sm text-red-600">${rp(car.types_min_price)}</p>
+            </a>
         `;
                 track.appendChild(card);
             }

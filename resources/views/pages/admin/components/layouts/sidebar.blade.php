@@ -24,7 +24,8 @@
                 Dashboard
             </a>
 
-            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+            <a href="{{ route('analytic') }}"
+                class="flex items-center gap-3 px-3 py-2 rounded-md {{ request()->routeIs('analytic') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }} hover:bg-gray-100">
                 <span class="material-symbols-outlined text-lg">analytics</span>
                 Analytics
             </a>
@@ -137,7 +138,8 @@ hover:bg-gray-100">
 
         <div class="space-y-1">
 
-            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
+            <a href="{{ route('setting.index') }}"
+                class="flex items-center gap-3 px-3 py-2 rounded-md {{ request()->routeIs('setting.*') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }} hover:bg-gray-100">
                 <span class="material-symbols-outlined text-lg">settings</span>
                 Settings
             </a>
