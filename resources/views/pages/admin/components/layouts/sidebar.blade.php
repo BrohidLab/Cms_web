@@ -144,11 +144,6 @@ hover:bg-gray-100">
                 Settings
             </a>
 
-            <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-gray-100">
-                <span class="material-symbols-outlined text-lg">description</span>
-                Logs
-            </a>
-
         </div>
 
     </nav>

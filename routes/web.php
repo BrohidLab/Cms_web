@@ -131,11 +131,11 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('user-admin/Konsultasi')->name('konsultasi.')->group(function () {
         Route::get('/',[ConsultationController::class ,'index'])->name('index');
+        Route::get('/detail/{id}',[ConsultationController::class ,'show'])->name('show');
         
     });
     Route::prefix('user-admin/settings')->name('setting.')->group(function () {
         Route::get('/',[ProfileWebController::class ,'index'])->name('index');
         Route::post('/create',[ProfileWebController::class ,'store'])->name('store');
-        
     });
 });

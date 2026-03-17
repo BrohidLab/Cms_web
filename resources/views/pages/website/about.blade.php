@@ -20,26 +20,7 @@
 
                 <div class="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base">
 
-                    <p>
-                        Kami adalah sebuah platform yang berfokus pada penyediaan
-                        informasi dan layanan digital yang bermanfaat bagi masyarakat.
-                        Dengan memanfaatkan teknologi modern, kami berkomitmen untuk
-                        menghadirkan solusi yang efektif, mudah digunakan, dan
-                        terpercaya.
-                    </p>
-
-                    <p>
-                        Sejak awal berdiri, tujuan kami adalah menciptakan pengalaman
-                        digital yang sederhana namun powerful. Kami percaya bahwa
-                        teknologi harus mampu membantu manusia dalam menjalankan
-                        aktivitas sehari-hari dengan lebih efisien.
-                    </p>
-
-                    <p>
-                        Dengan tim yang berdedikasi serta semangat inovasi yang tinggi,
-                        kami terus mengembangkan berbagai fitur dan layanan agar dapat
-                        memberikan nilai terbaik bagi pengguna.
-                    </p>
+                    {!! profileWeb()->about !!}
 
                 </div>
 
@@ -59,9 +40,9 @@
             </div>
 
             <div class="rounded-xl overflow-hidden shadow-md">
-
-                <iframe src="https://www.google.com/maps?q=Jakarta&output=embed" width="100%" height="420"
-                    style="border:0;" allowfullscreen="" loading="lazy">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.773920721896!2d110.40700187411022!3d-7.15211857016343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708613d80b2435%3A0x2d8c0324fd8f3e3c!2sSuzuki%20Ungaran%20Sunmotor%20Indosentra%20Trada!5e0!3m2!1sid!2sid!4v1773667578604!5m2!1sid!2sid"
+                    class="w-full h-[400px]" allowfullscreen="" loading="lazy">
                 </iframe>
 
             </div>

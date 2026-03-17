@@ -95,4 +95,117 @@
 
         </div>
     </section>
+    <section id="konsultasi" class="py-20 bg-white w-full">
+
+        <div class="px-4 md:px-8 lg:px-32">
+
+            <div class="mb-5 text-center">
+                <h2 class="text-xl md:text-3xl text-gray-800 font-bold">
+                    Konsultasi dengan Sales
+                </h2>
+                <p class="text-gray-500 text-sm mt-2">
+                    Hubungi kami atau kunjungi dealer terdekat
+                </p>
+            </div>
+
+            {{-- GRID --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+                {{-- LEFT FORM --}}
+                <div class="bg-gray-50 rounded-md shadow-lg p-6 md:p-8 text-gray-400">
+                    <form action="{{ route('konsultasi.store') }}" method="POST" class="space-y-6">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Nama Lengkap
+                                </label>
+                                <input type="text" name="name"
+                                    class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Nomor WhatsApp
+                                </label>
+                                <input name="no_wa" type="tel" placeholder="082xxxxxxx98"
+                                    class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Pilih Mobil
+                                </label>
+                                <select name="product_id"
+                                    class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                                    <option>-- Pilih Mobil --</option>
+
+                                    @foreach ($products as $prod)
+                                        <option value="{{ $prod->id }}">{{ $prod->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Kota / Lokasi
+                                </label>
+                                <input name="lokasi" type="text" placeholder="Contoh : Semarang"
+                                    class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-1">
+                                Pesan
+                            </label>
+                            <textarea name="pesan" rows="4"
+                                class="w-full text-sm border border-gray-300 rounded-lg px-4 py-1 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition">
+                            Kirim Konsultasi
+                        </button>
+
+                    </form>
+                    <div class="w-full text-center flex justify-center">
+                        @if (session('success'))
+                            <div class="text-green-700 px-4 py-3 rounded-lg text-sm">
+                                {{ session('success') }}
+                            </div>
+                        @elseif(session('error'))
+                            <div class="text-red-700 px-4 py-3 rounded-lg text-sm">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                    </div>
+
+                </div>
+
+                {{-- RIGHT MAP --}}
+                <div class="rounded-md overflow-hidden shadow-lg">
+
+                    <div class="bg-gray-100 p-4 border-b">
+                        <h3 class="font-semibold text-lg">
+                            Lokasi Dealer
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            Kunjungi showroom kami
+                        </p>
+                    </div>
+
+                    <iframe src="https://maps.google.com/maps?q=bandung&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        class="w-full h-[400px] border-0">
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 @endsection

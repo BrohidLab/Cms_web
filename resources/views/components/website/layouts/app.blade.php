@@ -40,7 +40,7 @@
             <!-- Menu Items -->
             <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-2">
 
-                <a href="#"
+                <a href="https://wa.me/{{ profileWeb()->no_wa }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -53,7 +53,7 @@
                     </span>
                 </a>
 
-                <a href="#"
+                <a href="https://wa.me/{{ profileWeb()->no_wa }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -66,7 +66,7 @@
                     </span>
                 </a>
 
-                <a href="#"
+                <a href="https://wa.me/{{ profileWeb()->no_wa }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-yellow-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -92,7 +92,7 @@
                     </span>
                 </a>
 
-                <a href="#"
+                <a href="{{ route('website.service') }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-red-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">

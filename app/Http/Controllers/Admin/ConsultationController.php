@@ -34,4 +34,15 @@ class ConsultationController extends Controller
 
         return view('pages.admin.pages.consultation.index',compact('consultations'));
     }
+
+    public function show($id)
+    {
+        $consultation = Consultation::findOrFail($id);
+        if (!$consultation->read_at) {
+            $consultation->update([
+                'read_at' => now() // atau Carbon::now()
+            ]);
+        }
+        return view('pages.admin.pages.consultation.show', compact('consultation'));
+    }
 }

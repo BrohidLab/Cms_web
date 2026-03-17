@@ -76,7 +76,7 @@
                             Hubungi tim kami melalui WhatsApp untuk konsultasi langsung.
                         </p>
 
-                        <a href="https://wa.me/628xxxxxxxxxx"
+                        <a href="https://wa.me/{{ profileWeb()->no_wa }}"
                             class="inline-block bg-white text-blue-600 px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition">
 
                             Chat WhatsApp

@@ -5,8 +5,8 @@
         class="px-4 py-3 md:px-10 lg:px-20 md:py-5 text-white bg-gray-700 flex items-center border-b border-gray-800 transition-all duration-300">
 
         <!-- Logo -->
-        <div class="w-[140px] lg:w-[240px]">
-            logo
+        <div class="w-auto mr-5">
+            <img src="{{ asset('storage/' . profileWeb()->logo) }}" />
         </div>
 
         <!-- MENU (hidden saat normal) -->
@@ -18,7 +18,7 @@
         <div class="flex w-full flex-1 items-center justify-end gap-2">
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-4 h-4">
+                stroke="currentColor" class="w-6 h-6">
 
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
 
@@ -26,7 +26,7 @@
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
             </svg>
 
-            <span class="text-xs">Suzuki Ungaran</span>
+            <span class="text-xs">{{ profileWeb()->location ?? 'Suzuki Ungaran' }}</span>
 
         </div>
 

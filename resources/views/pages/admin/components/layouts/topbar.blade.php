@@ -10,15 +10,6 @@
     <!-- RIGHT -->
     <div class="flex items-center gap-4">
 
-        <!-- Notification -->
-        <button class="relative text-gray-600 hover:text-indigo-600 transition">
-            🔔
-            <span
-                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                3
-            </span>
-        </button>
-
         <!-- Profile -->
         @auth
             <div class="relative group">
@@ -44,13 +35,9 @@
 
                 <!-- Dropdown -->
                 <div
-                    class="absolute right-0 mt-3 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200">
+                    class="absolute right-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200">
 
-                    <a href="/profile" class="block px-4 py-2 text-sm hover:bg-gray-100">
-                        Profile
-                    </a>
-
-                    <a href="/settings" class="block px-4 py-2 text-sm hover:bg-gray-100">
+                    <a href="{{ route('setting.index') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">
                         Settings
                     </a>
 

@@ -10,27 +10,29 @@ class ProfileWeb extends Model
 {
 	public $incrementing = false;
 	protected $fillable = [
-	        'name',
-	        'description_short',
-	        'about',
-	        'no_wa',
-	        'email',
-	        'google_maps',
-	        'logo'
-	    ];
+        'name',
+        'description_short',
+        'about',
+        'no_wa',
+        'email',
+        'address',
+        'location',
+        'google_maps',
+        'logo'
+    ];
 	    
     protected $casts = [
-            'id' => 'string',
-       ];
+        'id' => 'string',
+    ];
     
-         public static function boot(): void
-         {
-             parent::boot();
-             self::observe(ProfileWebObserver::class);
-        }
+    public static function boot(): void
+    {
+        parent::boot();
+        self::observe(ProfileWebObserver::class);
+    }
 
-        public function socials()
-            {
-                return $this->hasMany(SocialMedia::class);
-            }
+    public function socials()
+    {
+        return $this->hasMany(SocialMedia::class);
+    }
 }

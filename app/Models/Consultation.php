@@ -13,7 +13,8 @@ class Consultation extends Model
         'no_wa',
         'product_id',
         'lokasi',
-        'pesan'
+        'pesan',
+        'read_at'
     ];
 
     public static function boot(): void

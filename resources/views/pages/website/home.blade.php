@@ -409,9 +409,7 @@
                             </p>
                         </div>
 
-                        <iframe src="https://maps.google.com/maps?q=bandung&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            class="w-full h-[400px] border-0">
-                        </iframe>
+                        {!! profileWeb()->google_maps !!}
 
                     </div>
 
