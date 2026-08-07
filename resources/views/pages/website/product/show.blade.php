@@ -342,4 +342,9 @@
             }
         });
     </script>
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: @json($product->name ?? 'Hubungi Kami')
+        });
+    </script>
 @endpush

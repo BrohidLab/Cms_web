@@ -215,3 +215,10 @@
 
     </section>
 @endsection
+@push('script')
+    <script>
+        fbq('track', 'ViewContent', {
+            content_name: @json($banner->title ?? 'Hubungi Kami')
+        });
+    </script>
+@endpush
