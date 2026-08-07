@@ -35,7 +35,7 @@
                                 <option value="">-- Pilih Type --</option>
                                 @foreach ($types as $type)
                                     <option value="{{ $type->id }}">
-                                        {{ $type->name }} - {{ $type->transmition }}
+                                        {{ $type->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -82,8 +82,8 @@
                                             {{-- Header Type --}}
                                             <div class="px-6 py-4 border-b bg-gray-50 rounded-t-2xl">
                                                 <h3 class="font-semibold text-gray-800">
-                                                    {{ $typeImages->first()->type->name }}
-                                                    - {{ $typeImages->first()->type->transmition }}
+                                                    {{ $typeImages?->first()?->type?->name }}
+                                                
                                                 </h3>
                                             </div>
 
@@ -98,14 +98,14 @@
                                                             {{-- Color Name --}}
                                                             <div class="flex items-center gap-2 mb-3">
                                                                 <h4 class="font-medium text-gray-700">
-                                                                    {{ $colorImages->first()->color->name }}
+                                                                    {{ $colorImages?->first()->color?->name }}
                                                                 </h4>
 
                                                                 <div class="w-5 h-5 rounded-full border"
-                                                                    style="background-color: {{ $colorImages->first()->color->code_color }}">
+                                                                    style="background-color: {{ $colorImages->first()->color?->code_color }}">
                                                                 </div>
 
-                                                                @if ($colorImages->first()->color->jenis_color === 'two_tone')
+                                                                @if ($colorImages->first()->color?->jenis_color === 'two_tone')
                                                                     <div class="w-5 h-5 rounded-full border"
                                                                         style="background-color: {{ $colorImages->first()->color->code_color2 }}">
                                                                     </div>
@@ -152,7 +152,7 @@
                     </span>
                     Kembali
                 </a>
-                <a href="{{ route('product.create_gallery', $product->id) }}" id="btn-next"
+                <a href="{{ route('product.create_price_product', $product->id) }}" id="btn-next"
                     class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-md text-white px-6 py-2 flex items-center rounded-sm shadow transition">
                     Selanjutnya
                     <span class="material-symbols-outlined">

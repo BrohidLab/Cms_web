@@ -19,7 +19,7 @@ class HomePagesController extends Controller
 
     public function simpan(Request $request){
         $request->validate([
-            'files.*' => 'required|file|mimes:jpg,jpeg,png,mp4,mov|max:20480',
+            'files.*' => 'required|file|mimes:jpg,jpeg,png,mp4,mov',
         ]);
 
         foreach ($request->file('files') as $file) {
@@ -40,4 +40,10 @@ class HomePagesController extends Controller
         return redirect()->route('front_page.homes.index')
             ->with('success', 'Banner berhasil diupload');
     }
+    
+   public function destroy($id) {
+    BannerSlidePage::findOrFail($id)->delete();
+    return back()->with('success', 'Berhasil hapus banner slides');
+   }
+    
 }

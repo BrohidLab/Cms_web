@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends Model
 {
     public $incrementing = false;
-    
-    protected $fillable = ['name', 'slug', 'description', 'seater', 'cc', 'status'];
+    protected $keyType = 'string';
+    protected $fillable = ['name', 'slug', 'description', 'seater', 'cc', 'status', 'link_brosur', 'banner_page'];
     
     protected $casts = [
         'id' => 'string',
@@ -52,5 +52,19 @@ class Product extends Model
     public function galleries()
     {
         return $this->hasMany(ProductGallery::class,'product_id');
+    }
+
+    public function brosurImage(){
+        return $this->hasMany(ProductImageBrosur::class, 'product_id');
+    }
+
+    public function mainPrice()
+    {
+    	return $this->hasOne(ProductPriceType::class, 'id_product')
+    				->orderBy('price', 'ASC');
+    }
+    
+    public function prices() {
+        return $this->hasMany(ProductPriceType::class, 'id_product');
     }
 }

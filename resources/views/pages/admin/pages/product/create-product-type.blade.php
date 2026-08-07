@@ -18,7 +18,7 @@
                 <form action="{{ route('product.store_product_type') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="grid md:grid-cols-3 gap-6">
+                    <div class="grid gap-6">
 
                         <div>
                             <label class="block text-sm font-medium text-gray-600 mb-1">Type Name</label>
@@ -26,17 +26,8 @@
                             <input type="text" name="name"
                                 class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-1">Price</label>
-                            <input type="number" name="price"
-                                class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-600 mb-1">Transmition</label>
-                            <input type="text" name="transmition"
-                                class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="md:col-span-3">
+                        
+                        <div class="">
                             <div class="w-full py-2 pb-5 border-b border-gray-400 flex items-center justify-end">
                                 <button type="submit" class="bg-green-600 text-sm px-5 py-2 text-white rounded-md">
                                     Tambah Type
@@ -58,12 +49,7 @@
                                                 <th
                                                     class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
                                                     Name</th>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-                                                    Price</th>
-                                                <th
-                                                    class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-                                                    Transmission</th>
+                                                
                                                 <th
                                                     class="px-6 py-3 text-center text-xs font-semibold text-gray-500 uppercase">
                                                     Action</th>
@@ -76,12 +62,6 @@
                                                 <tr id="row-{{ $type->id }}" class="hover:bg-gray-50 transition">
                                                     <td class="px-6 py-4 text-sm font-medium text-gray-800">
                                                         {{ $type->name }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-sm text-gray-600">
-                                                        Rp {{ number_format($type->price, 0, ',', '.') }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-sm text-gray-600">
-                                                        {{ $type->transmition }}
                                                     </td>
                                                     <td class="px-6 py-4 text-center">
                                                         <button type="button"

@@ -60,7 +60,7 @@
 
                         {{-- Lowest Price --}}
                         <p class="text-xl font-bold text-blue-600 mb-3">
-                            Rp {{ number_format($product->types_min_price ?? 0, 0, ',', '.') }}
+                            Rp {{ number_format($product->mainPrice?->price ?? 0, 0, ',', '.') }}
                         </p>
 
                         {{-- Description --}}

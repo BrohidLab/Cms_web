@@ -1,5 +1,7 @@
 @extends('components.website.layouts.app')
 @section('title', 'Home - Suzuki Auto Zone')
+@section('meta_description', 'Suzuki Auto Zone menyediakan mobil Suzuki terbaru, layanan servis resmi, sparepart original, dan promo terbaik. Temukan kendaraan Suzuki impian Anda di sini.')
+@section('meta_keywords', 'dealer suzuki, mobil suzuki terbaru, servis suzuki, sparepart suzuki, promo suzuki, gunawan suzuki ungaran')
 @push('style')
     <style>
         .carousel-viewport {
@@ -27,7 +29,7 @@
 
         .card img {
             width: 240px;
-            height: 140px;
+            height: auto;
             object-fit: cover;
         }
 
@@ -66,13 +68,19 @@
     </style>
 @endpush
 @section('content')
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center bg-white">
         <div class="relative w-full overflow-hidden">
             <div id="slider" class="flex transition-transform duration-700 ease-in-out">
                 @foreach ($bannerSlide as $banner)
-                    <div class="min-w-full">
-                        <img src="{{ asset('storage/' . $banner->files) }}"
-                            class="w-full h-[150px] md:h-[540px] object-cover">
+                    <div class="min-w-full flex justify-center">
+                        @if ($banner->type === 'video')
+                            <video class="w-full h-auto" muted
+                                src="{{ asset('storage/' . $banner->files) }}" playsinline autoplay preload="metadata">
+                            </video>
+                        @else
+                            <img src="{{ asset('storage/' . $banner->files) }}"
+                                class="w-full h-auto " alt="Suzuki Semarang, Suzuki Auto Zone" aria-label="Suzuki Semarang, Suzuki Auto Zone">
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -142,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <div class="carousel relative w-full max-w-6xl mx-auto my-10">
+        <div class="carousel relative w-full max-w-6xl mx-auto my-10 bg-white">
             <div class="mb-10">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-700">Produk Pilihan</h2>
                 <span class="text-xs md:text-sm text-gray-400">Temukan berbagai pilihan mobil Suzuki yang dirancang khusus
@@ -167,6 +175,7 @@
                 </a>
             </div>
         </div>
+        <section class="w-full flex items-center">
         <div class="bg-white w-full px-4 md:px-8 lg:px-32 py-10 md:py-12">
             <h2 class="text-xl md:text-2xl text-gray-700 font-bold mb-1">Berita Terbaru</h2>
             <span class="text-sm text-gray-400">
@@ -174,10 +183,10 @@
                 disini.
             </span>
 
-            <div class="hidden md:grid grid-cols-3 gap-5 mt-7">
+            <div class="hidden md:block md:grid grid-cols-3 gap-5 mt-7">
                 @foreach ($article as $item)
                     <div class="bg-white rounded-xl shadow">
-                        <img src="{{ asset('storage/' . $item->thumbnail) }}" class="w-full h-48 object-cover rounded-t-xl">
+                        <img src="{{ asset('storage/' . $item->thumbnail) }}" class="w-full h-48 object-cover rounded-t-xl" alt="{{ $item->title }}" aria-label="{{ $item->title }}">
 
                         <a href="{{ route('website.article.show', $item->slug) }}">
                             <div class="p-4">
@@ -186,7 +195,7 @@
                                 </h3>
 
                                 <div class="text-sm text-gray-500">
-                                    {!! Str::limit($item->content, 100) !!}
+                            
                                 </div>
                             </div>
                         </a>
@@ -204,7 +213,7 @@
                             <div class="bg-white rounded-xl shadow">
 
                                 <img src="{{ asset('storage/' . $item->thumbnail) }}"
-                                    class="w-full h-48 object-cover rounded-t-xl">
+                                    class="w-full h-48 object-cover rounded-t-xl" alt="{{ $item->title }}" aria-label="{{ $item->title }}">
 
                                 <a href="{{ route('website.article.show', $item->slug) }}">
                                     <div class="p-4">
@@ -248,6 +257,7 @@
                 </a>
             </div>
         </div>
+        </section>
         <section class="py-10 bg-gray-50 w-full">
             <div class="text-center">
 
@@ -266,7 +276,7 @@
                                 <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 max-w-xl mx-auto">
 
                                     <img src="{{ asset('storage/' . $item->image) }}"
-                                        class="w-20 h-20 rounded-full object-cover mx-auto mb-4">
+                                        class="w-20 h-20 rounded-full object-cover mx-auto mb-4" alt="{{ $item->product->name }}" aria-label="{{ $item->product->name }}">
 
                                     <h3 class="font-semibold text-lg">
                                         {{ $item->nama_pelanggan }}
@@ -409,7 +419,7 @@
                             </p>
                         </div>
 
-                        {!! profileWeb()->google_maps !!}
+                        {!! profileWeb()?->google_maps ?? '' !!}
 
                     </div>
 
@@ -460,11 +470,14 @@
             }
 
             function startAutoSlide() {
-                autoSlide = setInterval(() => {
-                    index = (index + 1) % totalSlides;
-                    goToSlide(index);
-                }, 4000);
-            }
+    if (totalSlides <= 1) return; // biar gak jalan kalau cuma 1 slide
+
+    stopAutoSlide();
+    autoSlide = setInterval(() => {
+        index = (index + 1) % totalSlides;
+        goToSlide(index);
+    }, 4000);
+}
 
             function stopAutoSlide() {
                 clearInterval(autoSlide);
@@ -511,15 +524,29 @@
 
             dots[i].classList.remove('bg-gray-400');
             dots[i].classList.add('bg-blue-500');
+
+            const currentSlide = slider.children[i];
+            const video = currentSlide.querySelector('video');
+
+            // Jika ada video, play dan tunggu selesai
+            if (video) {
+                clearInterval(interval); // stop auto slide
+                video.currentTime = 0; // reset ke awal
+                video.play();
+                video.onended = () => {
+                    nextSlide();
+                    interval = setInterval(nextSlide, 4000); // lanjut auto slide
+                };
+            }
         }
 
-        function nextSlide() {
+        // Fungsi slide berikutnya
+        function nextSlidehome() {
             index = (index + 1) % total;
             showSlide(index);
         }
 
-        interval = setInterval(nextSlide, 4000);
-
+        // Klik dot
         dots.forEach(dot => {
             dot.addEventListener('click', () => {
                 clearInterval(interval);
@@ -528,7 +555,19 @@
             });
         });
 
+        // Jalankan slide pertama
         showSlide(index);
+
+    function startAutoSlides() {
+        clearInterval(interval);
+        interval = setInterval(() => {
+
+        
+            nextSlidehome();
+        }, 4000);
+    }
+
+    startAutoSlides();
     </script>
     <script>
         const cars = @json($products);
@@ -564,8 +603,9 @@
                 if (i === Math.floor(visibleCards / 2)) card.classList.add('active');
                 card.style.marginRight = '5px'; // <-- tambahkan ini
                 card.innerHTML = `
-            <a href="/product/${car.slug}" class="w-full">
-            <img class="mb-2" src="${imageCar}" alt="${car.name}">
+            
+            <img class="mb-2 w-full h-auto" src="${imageCar}" alt="${car.name}">
+            <a href="/product/${car.slug}">
             <div class="flex flex-col justify-center">
             <h3 class="font-semibold w-full  text-gray-700">${car.name}</h3>
             <p class="flex items-center justify-center gap-2 text-gray-600 text-xs">
@@ -584,9 +624,10 @@
                 </span>
             </p>
             </div>
-            <p class="text-xs mt-3 text-gray-600">Mulai Dari</p>   
-            <p class="font-bold text-sm text-red-600">${rp(car.types_min_price)}</p>
             </a>
+            <p class="text-xs mt-3 text-gray-600">Mulai Dari</p>   
+            <p class="font-bold text-sm text-red-600">${rp(car.main_price?.price ?? 0)}</p>
+            
         `;
                 track.appendChild(card);
             }

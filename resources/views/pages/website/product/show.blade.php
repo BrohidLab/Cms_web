@@ -1,15 +1,20 @@
 @extends('components.website.layouts.app')
+@section('title',
+    $product->meta_title ?? $product->name . ' | Harga & Spesifikasi - Suzuki Auto Zone'
+)
 
 @section('content')
-    <x-website.banner title="{{ $banner->title ?? 'Tentang Kami' }}" description="{{ $banner->sub_title }}"
-        image="{{ asset('storage/' . $banner->images) }}" :breadcrumbs="[
+    <x-website.banner title="{{ $product->name ?? 'Tentang Kami' }}" description=""
+        image="{{ asset('storage/' . $product->banner_page) }}" :breadcrumbs="[
             ['label' => 'Home', 'url' => '/'],
             ['label' => 'Product', 'url' => route('website.product')],
             ['label' => $product->name],
         ]" />
     <section>
         <div class="relative">
-            <img src="{{ asset('storage/' . $product->mainImage->image) }}" class="w-full h-[450px] object-cover" />
+            @foreach ($product->brosurImage as $brosr)
+                <img src="{{ asset('storage/' . $brosr->images) }}" alt="{{ $product->name }} Brosur Suzuki Auto Zone" class="w-full h-auto object-cover" />
+            @endforeach
             <div class="flex border-b justify-center py-10 w-full bg-white gap-2">
                 <div x-data="{ tab: 0 }" class="w-full bg-white py-10">
 
@@ -79,10 +84,12 @@
                                     <p class="mt-4 text-gray-600 font-bold text-2xl uppercase" x-text="colorName"></p>
 
                                     <div class="flex justify-center mt-10 gap-4">
-                                        <button class="px-4 py-2 bg-gray-700 text-white text-xs rounded-full">
+                                        <a href="{{ $product->link_brosur }}" target="_blank"
+                                            class="px-4 py-2 bg-gray-700 text-white text-xs rounded-full">
                                             Download Brosur
-                                        </button>
-                                        <button class="px-4 py-2 border border-gray-700 text-xs rounded-full">
+                                        </a>
+                                        <button
+                                            class="btn-detail border border-gray-500 text-gray-700 text-xs px-5 font-bold py-1 rounded-full">
                                             Spesifikasi
                                         </button>
                                     </div>
@@ -118,7 +125,7 @@
                     <div x-show="galleryTab=='exterior'" class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
                         @foreach ($product->galleries->where('category', 'exterior') as $gallery)
-                            <img src="{{ asset('storage/' . $gallery->image) }}" class="rounded-lg w-full">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" class="rounded-lg w-full" alt="Suzuki Exterior, Suzuki Auto Zone Exterior">
                         @endforeach
 
                     </div>
@@ -128,7 +135,7 @@
                     <div x-show="galleryTab=='interior'" class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
                         @foreach ($product->galleries->where('category', 'interior') as $gallery)
-                            <img src="{{ asset('storage/' . $gallery->image) }}" class="rounded-lg w-full">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="Suzuki Interior, Suzuki Auto Zone Interior" class="rounded-lg w-full">
                         @endforeach
 
                     </div>
@@ -140,7 +147,7 @@
                 {{-- IMAGE PRODUK --}}
                 <div class="text-center">
                     @if ($product->mainImage)
-                        <img src="{{ asset('storage/' . $product->mainImage->image) }}" class="mx-auto w-full max-w-md">
+                        <img src="{{ asset('storage/' . $product->mainImage->image) }}" alt="{{$product->name}}" class="mx-auto w-full max-w-md">
                     @endif
                 </div>
 
@@ -155,12 +162,12 @@
 
                     <div class="bg-white rounded-xl shadow border divide-y">
 
-                        @foreach ($product->types->sortBy('price') as $type)
+                        @foreach ($listPrices as $item)
                             <div class="flex justify-between items-center px-6 py-4 hover:bg-gray-50 transition">
 
                                 <div>
                                     <p class="font-semibold text-gray-800">
-                                        {{ $type->name . ' ' . $type->transmition }}
+                                        {{ $item->type?->name . ' ' . $item->transmition }}
                                     </p>
 
                                     <p class="text-sm text-gray-500">
@@ -169,7 +176,7 @@
                                 </div>
 
                                 <div class="text-xl font-bold text-red-600">
-                                    Rp {{ number_format($type->price, 0, ',', '.') }}
+                                    Rp {{ number_format($item->price, 0, ',', '.') }}
                                 </div>
 
                             </div>
@@ -283,9 +290,7 @@
                                 </p>
                             </div>
 
-                            <iframe src="https://maps.google.com/maps?q=bandung&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                class="w-full h-[400px] border-0">
-                            </iframe>
+                            {!! profileWeb()->google_maps !!}
 
                         </div>
 
@@ -295,9 +300,41 @@
 
             </section>
         </div>
+        <div id="modalDetail" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+            <div class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-6 relative">
+
+                <!-- Close Button -->
+                <button id="closeModal" class="absolute top-2 right-3 text-gray-500 text-xl">
+                    &times;
+                </button>
+
+                <h2 class="text-lg font-semibold mb-4 border-b pb-5 border-gray-300">Spesifikasi</h2>
+
+                <div id="modalContent" class="text-gray-700">
+                    {!! $product->description !!}
+                </div>
+
+            </div>
+        </div>
     </section>
 @endsection
 @push('script')
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script></script>
+    <script>
+        $(document).on('click', '.btn-detail', function() {
+            $('#modalDetail').removeClass('hidden').addClass('flex');
+        });
+
+        // Close modal
+        $('#closeModal').on('click', function() {
+            $('#modalDetail').addClass('hidden').removeClass('flex');
+        });
+
+        // Klik luar modal = close
+        $('#modalDetail').on('click', function(e) {
+            if (e.target === this) {
+                $(this).addClass('hidden').removeClass('flex');
+            }
+        });
+    </script>
 @endpush

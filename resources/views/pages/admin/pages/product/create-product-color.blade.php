@@ -96,9 +96,9 @@
                                             {{-- Header Type --}}
                                             <div class="px-6 py-5 border-b bg-gray-50 rounded-t-2xl">
                                                 <h2 class="text-lg font-semibold text-gray-800">
-                                                    {{ $colors->first()->type->name }}
+                                                    {{ $colors?->first()?->type?->name }}
                                                     <span class="text-sm text-gray-500 font-normal">
-                                                        - {{ $colors->first()->type->transmition }}
+                                                        - {{ $colors?->first()?->type?->transmition }}
                                                     </span>
                                                 </h2>
                                             </div>

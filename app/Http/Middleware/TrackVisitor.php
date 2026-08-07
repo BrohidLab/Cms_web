@@ -19,11 +19,15 @@ class TrackVisitor
     	if ($request->is('user-admin*')) {
     	        return $next($request);
     	    }
+    	    
+    	    $userAgent = substr(request()->userAgent(), 0, 255);
+    	    $cleanUrl = request()->url();
+    	    
     	Analytic::create([
-    	        'url' => $request->fullUrl(),
+    	        'url' => $cleanUrl,
     	        'page' => $request->path(),
     	        'ip_address' => $request->ip(),
-    	        'user_agent' => $request->userAgent(),
+    	        'user_agent' => $userAgent,
     	    ]);
         return $next($request);
     }

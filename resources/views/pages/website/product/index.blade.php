@@ -1,5 +1,13 @@
 @extends('components.website.layouts.app')
+@section('title', 'Mobil Suzuki Terbaru 2026 | Harga & Spesifikasi - Suzuki Auto Zone')
 
+@section('meta_description',
+    'Lihat daftar mobil Suzuki terbaru lengkap dengan harga, spesifikasi, fitur, dan promo menarik. Temukan kendaraan Suzuki yang sesuai kebutuhan Anda di Suzuki Auto Zone.'
+)
+
+@section('meta_keywords',
+    'mobil suzuki, harga mobil suzuki, suzuki terbaru, dealer suzuki, promo suzuki'
+)
 @section('content')
     <x-website.banner title="{{ $banner->title ?? 'Tentang Kami' }}" description="{{ $banner->sub_title }}"
         image="{{ asset('storage/' . $banner->images) }}" :breadcrumbs="[['label' => 'Home', 'url' => '/'], ['label' => 'Product']]" />
@@ -36,22 +44,22 @@
 
                         <a href="{{ route('website.product.show', $product->slug) }}">
                             <!-- Image -->
-                            <div class="h-48 overflow-hidden">
-                                <img src="{{ asset('storage/' . $product->mainImage->image) }}"
+                            <div class="h-auto overflow-hidden">
+                                <img src="{{ asset('storage/' . $product?->mainImage?->image) }}"
                                     class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                             </div>
 
                             <!-- Content -->
                             <div class="p-4">
 
-                                <h3 class="font-semibold text-gray-800 line-clamp-2">
+                                <h3 class="font-semibold text-gray-800 line-clamp-2 text-center md:text-left">
                                     {{ $product->name }}
                                 </h3>
 
-                                <div class="flex items-center mt-3 gap-4">
-                                    <p class="text-blue-600 flex flex-col">
+                                <div class="md:flex items-center mt-3 gap-4 text-center md:text-left">
+                                    <p class="text-blue-600 flex flex-col mb-5 md:mb-0">
                                         <span class="text-xs text-gray-500">Mulai dari</span>
-                                        Rp {{ number_format($product->types_min_price) }}
+                                        Rp {{ number_format($product->mainPrice?->price ?? 0) }}
                                     </p>
                                     <p class="flex flex-col gap-2 text-gray-600 text-xs">
                                         <span class="flex items-center gap-1">
@@ -197,9 +205,10 @@
                         </p>
                     </div>
 
-                    <iframe src="https://maps.google.com/maps?q=bandung&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                        class="w-full h-[400px] border-0">
-                    </iframe>
+                    <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.773920721896!2d110.40700187411022!3d-7.15211857016343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708613d80b2435%3A0x2d8c0324fd8f3e3c!2sSuzuki%20Ungaran%20Sunmotor%20Indosentra%20Trada!5e0!3m2!1sid!2sid!4v1773667578604!5m2!1sid!2sid"
+                    class="w-full h-[400px]" allowfullscreen="" loading="lazy">
+                </iframe>
 
                 </div>
 

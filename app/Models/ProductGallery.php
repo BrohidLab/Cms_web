@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductGallery extends Model
 {
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = ['product_id', 'category', 'image'];
     
     protected $casts = [

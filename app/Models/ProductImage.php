@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductImage extends Model
 {
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = ['image', 'product_id', 'type_id', 'color_id', 'is_main'];
 
-    
     protected $casts = [
         'id' => 'string',
     ];

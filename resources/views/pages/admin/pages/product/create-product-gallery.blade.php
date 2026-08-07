@@ -157,18 +157,18 @@
 
             </div>
             <div class="flex justify-end mt-6 gap-3">
-                <a href="{{ route('product.create_product_type', $product->id) }}"
+                <a href="{{ route('product.create_price_product', $product->id) }}"
                     class="bg-gray-200 hover:bg-gray-400 disabled:bg-gray-400 disabled:cursor-not-allowed text-md px-6 py-2 flex items-center rounded-sm shadow transition">
                     <span class="material-symbols-outlined">
                         chevron_left
                     </span>
                     Kembali
                 </a>
-                <a href="{{ route('product.publish_product', $product->id) }}" id="btn-next"
+                <a href="{{ route('product.image_brosur', $product->id) }}" id="btn-next"
                     class="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-md text-white px-6 py-2 flex items-center rounded-sm shadow transition">
-                    Publish Product
+                    Selanjutnya
                     <span class="material-symbols-outlined text-md ml-2">
-                        save
+                        chevron_right
                     </span>
                 </a>
             </div>
@@ -262,11 +262,24 @@
         });
     </script>
     <script>
-        $(document).on('click', '.btn-delete-image', function() {
+$(document).on('click', '.btn-delete-gallery', function() {
 
-            let button = $(this);
-            let url = button.data('url');
-            let card = button.closest('.relative');
+    let button = $(this);
+    let url = button.data('url');
+    let card = button.closest('.relative');
+
+    Swal.fire({
+        title: 'Yakin mau hapus?',
+        text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+
+        if (result.isConfirmed) {
 
             $.ajax({
                 url: url,
@@ -275,11 +288,31 @@
                     _token: "{{ csrf_token() }}"
                 },
                 success: function() {
+
+                    // notif sukses
+                    Swal.fire(
+                        'Terhapus!',
+                        'Data berhasil dihapus.',
+                        'success'
+                    );
+
                     card.fadeOut(300, function() {
                         $(this).remove();
                     });
+                },
+                error: function() {
+                    Swal.fire(
+                        'Error!',
+                        'Terjadi kesalahan saat menghapus.',
+                        'error'
+                    );
                 }
             });
-        });
-    </script>
+
+        }
+
+    });
+
+});
+</script>
 @endpush

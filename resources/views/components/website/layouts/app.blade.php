@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="id">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta name="google-site-verification" content="0UiH68VYJgPDUtDXvpBW91k9jMr0HRlKeaZ2QkTRJuM" />
     <title>@yield('title', 'Suzuki Auto Zone')</title>
+    <meta name="description" content="@yield('meta_description', 'Deskripsi default')">
+    <meta name="keywords" content="@yield('meta_keywords', 'keyword default')">
+    <meta name="facebook-domain-verification" content="31v1t4641ue9523mxdpiz3uqxgpgyl" />
+    <link rel="icon" href={{ asset('storage/' . profileWeb()?->logo) }} type="image/x-icon">
+    <link rel="shortcut icon" href={{ asset('storage/' . profileWeb()?->logo) }} type="image/x-icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +18,31 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1391372406265925');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1391372406265925&ev=PageView&noscript=1"
+/></noscript>
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18097535665"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'AW-18097535665');
+</script>
+        
     <script src="https://cdn.tailwindcss.com"></script>
     @stack('style')
     <style>
@@ -28,7 +57,7 @@
     <div class="bg-gray-100">
         @include('components.website.layouts.partials.header')
         <div class="fixed top-1/2 right-6 -translate-y-1/2 z-50 flex flex-col items-end space-y-3">
-            <button id="fabToggle"
+            <button id="fabToggle" aria-label="button-toggle-action"
                 class="w-12 h-12 bg-blue-500 text-white rounded-full shadow-xl flex items-center justify-center text-2xl hover:rotate-90 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
@@ -40,7 +69,7 @@
             <!-- Menu Items -->
             <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-2">
 
-                <a href="https://wa.me/{{ profileWeb()->no_wa }}"
+                <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -53,7 +82,7 @@
                     </span>
                 </a>
 
-                <a href="https://wa.me/{{ profileWeb()->no_wa }}"
+                <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -66,7 +95,7 @@
                     </span>
                 </a>
 
-                <a href="https://wa.me/{{ profileWeb()->no_wa }}"
+                <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-yellow-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -79,7 +108,7 @@
                     </span>
                 </a>
 
-                <a href="#"
+                <a href="{{route('website.simulasi')}}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-purple-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -111,7 +140,7 @@
 
 
         </div>
-        <button id="backToTop"
+        <button id="backToTop" aria-label="button-back-top"
             class="fixed bottom-6 right-6 z-50 hidden w-10 h-10 bg-blue-300 text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-5">
@@ -123,7 +152,9 @@
         @yield('content')
     </div>
     @include('components.website.layouts.partials.footer')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @stack('script')
+
     <script>
         const backToTop = document.getElementById("backToTop");
 

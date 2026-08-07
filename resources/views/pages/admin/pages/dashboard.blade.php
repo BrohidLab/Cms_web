@@ -183,8 +183,15 @@
                 @foreach ($latestProducts as $product)
                     <div class="border rounded-lg p-3 text-center hover:shadow transition">
 
-                        <img src="{{ asset('storage/' . $product->mainImage->image) }}"
-                            class="h-20 object-contain mx-auto mb-2">
+                        @php
+                            $image = $product->mainImage->image ?? null;
+                        @endphp
+                        
+                        <img 
+                            src="{{ $image ? asset('storage/' . $image) : asset('images/no-image.png') }}"
+                            class="h-20 object-contain mx-auto mb-2"
+                            alt="{{ $product->name }}"
+                        >
 
                         <p class="text-sm font-medium">
                             {{ $product->name }}

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ConsultationController;
 use App\Http\Controllers\Admin\HomePagesController;
 use App\Http\Controllers\Admin\ProfileWebController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\BookingServiceController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\AboutController;
 use App\Http\Controllers\Website\ProductPageController;
@@ -17,7 +18,9 @@ use App\Http\Controllers\Website\ServicePageController;
 use App\Http\Controllers\Website\SukuCadangPageController;
 use App\Http\Controllers\Website\ArticlePageController;
 use App\Http\Controllers\Website\ContactPageController;
+use App\Http\Controllers\Website\SimulationPageController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Sitemap\SitemapGenerator;
 
 Route::get('/', [HomeController::class, 'index'])->name('web-home');
 Route::post('/konsultasi', [HomeController::class, 'konsultasi'])->name('konsultasi.store');
@@ -30,6 +33,15 @@ Route::post('/suku-cadang/konsultasi',[SukuCadangPageController::class, 'konsult
 Route::get('/artikel',[ArticlePageController::class,'index'])->name('website.article.index');
 Route::get('/artikel/{slug}',[ArticlePageController::class,'show'])->name('website.article.show');
 Route::get('/kontak-kami', [ContactPageController::class, 'index'])->name('website.contact');
+Route::get('/simulasi-kredit', [SimulationPageController::class, 'index'])->name('website.simulasi');
+
+Route::post('/booking-service', [BookingServiceController::class, 'store'])->name('website.booking');
+
+Route::get('/sitemap.xml', function () {
+    return SitemapGenerator::create('https://suzukiautozone.com')
+        ->getSitemap()
+        ->toResponse(request());
+});
 
 Route::get('/user-admin', [AuthController::class, 'index']);
 Route::get('/user-admin/register', [AuthController::class, 'register'])->name('register_user');
@@ -77,6 +89,18 @@ Route::middleware('auth')->group(function () {
             [ProductController::class, 'publishProduct']
         )->name('publish_product');
 
+        Route::get('/product/image-brosur/{id}', [ProductController::class, 'imageBrosur'])->name('image_brosur');
+        Route::post('/product/image-brosur/store',
+            [ProductController::class, 'storeImageBrosur']
+        )->name('store_image_brosur');
+
+        Route::delete('/product/image-brosur/{id}',
+            [ProductController::class, 'deleteImageBrosur']
+        )->name('delete_image_brosur');
+
+        Route::get('/product-price/{idProduct}', [ProductController::class, 'productPrice'])->name('create_price_product');
+        Route::post('/product-price/store',[ProductController::class, 'storePriceType'])->name('store_price_type');
+        Route::delete('/destroy-price/{id}', [ProductController::class, 'deletePrice'])->name('destroy_price');
     });
 
     Route::prefix('user-admin/article')->name('article.')->group(function () {
@@ -94,6 +118,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/home-pages',[HomePagesController::class ,'index'])->name('homes.index');
         Route::get('/home-pages/upload',[HomePagesController::class ,'upload'])->name('homes.upload');
         Route::post('/home-pages/store',[HomePagesController::class ,'simpan'])->name('homes.store');
+        Route::delete('/home-pages/destroy/{id}', [HomePagesController::class, 'destroy'])->name('homes.destroy');
         
         /*About Me */
         Route::get('/about-pages',[AboutPagesController::class ,'index'])->name('about.index');
@@ -133,6 +158,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/',[ConsultationController::class ,'index'])->name('index');
         Route::get('/detail/{id}',[ConsultationController::class ,'show'])->name('show');
         
+    });
+    Route::prefix('user-admin/booking-service')->name('booking.')->group(function () {
+    	Route::get('/',[BookingServiceController::class ,'index'])->name('index');
+    	Route::get('/detail/{id}',[BookingServiceController::class ,'show'])->name('show');
+    
     });
     Route::prefix('user-admin/settings')->name('setting.')->group(function () {
         Route::get('/',[ProfileWebController::class ,'index'])->name('index');

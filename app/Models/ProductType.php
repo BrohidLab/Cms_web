@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductType extends Model
 {
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = ['product_id', 'name', 'price', 'transmition'];
 
     
@@ -23,5 +25,10 @@ class ProductType extends Model
     public function colors()
     {
         return $this->hasMany(ProductColor::class, 'type_id');
+    }
+
+    public function prices()
+    {
+    	return $this->hasMany(ProductPriceType::class, 'type_id');
     }
 }

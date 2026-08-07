@@ -1,5 +1,12 @@
 @extends('components.website.layouts.app')
+@section('title', 'Artikel & Tips Suzuki Terbaru | Suzuki Auto Zone')
+@section('meta_description',
+    'Kumpulan artikel, berita, tips perawatan, informasi promo, dan ulasan mobil Suzuki terbaru dari Suzuki Auto Zone.'
+)
 
+@section('meta_keywords',
+    'artikel suzuki, tips mobil suzuki, berita suzuki, promo suzuki, perawatan mobil'
+)
 @section('content')
     <x-website.banner title="{{ $banner->title ?? 'Berita Terbaru' }}" description="{{ $banner->sub_title ?? '' }}"
         image="{{ $banner && $banner->images
@@ -44,7 +51,7 @@
                         <div class="relative overflow-hidden">
 
                             <img src="{{ asset('storage/' . $article->thumbnail) }}"
-                                class="w-full h-56 object-cover group-hover:scale-105 transition duration-300">
+                                class="w-full h-56 object-cover group-hover:scale-105 transition duration-300" alt="Suzuki Semarang, Suzuki Auto Zone, Suzuki Semarang">
 
                             <!-- LABEL -->
 

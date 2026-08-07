@@ -1,11 +1,11 @@
 <section class="relative">
 
     <!-- Banner -->
-    <div class="relative h-[450px] flex items-center justify-center text-center">
+    <div class="relative w-full h-auto min-h-[120px] overflow-hidden flex items-center justify-center text-center">
 
-        <img src="{{ $image }}" class="absolute inset-0 w-full h-full object-cover">
+        <img src="{{ $image }}" class="relative w-full object-cover" alt="Suzuki Semarang, Suzuki Auto Zone">
 
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
 
         <div class="relative z-10 text-white px-6 max-w-6xl">
 
@@ -20,7 +20,7 @@
             @endif
 
         </div>
-
+</div>
     </div>
 
 

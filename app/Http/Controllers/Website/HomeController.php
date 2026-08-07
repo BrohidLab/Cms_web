@@ -17,8 +17,9 @@ class HomeController extends Controller
         $bannerSlide = BannerSlidePage::where('pages_name', 'home_page')->get();
         $products = Product::with([
             'mainImage:id,product_id,image,is_main',
+            'mainPrice'
         ])
-            ->withMin('types', 'price') // ambil harga paling rendah
+        	->where('status', 'publish')
             ->latest()
             ->get();
 

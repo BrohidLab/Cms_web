@@ -1,0 +1,54 @@
+ app/Helpers/universe.php                                                 |   9 [32m+[m[31m-[m
+ app/Http/Controllers/Admin/HomePagesController.php                       |   8 [32m+[m[31m-[m
+ app/Http/Controllers/Admin/ProductController.php                         | 232 [32m+++++++++++[m[31m---[m
+ app/Http/Controllers/Website/HomeController.php                          |   3 [32m+[m[31m-[m
+ app/Http/Controllers/Website/ProductPageController.php                   |  32 [32m+[m[31m-[m
+ app/Http/Controllers/Website/ServicePageController.php                   |   4 [32m+[m[31m-[m
+ app/Http/Middleware/TrackVisitor.php                                     |   8 [32m+[m[31m-[m
+ app/Models/Product.php                                                   |  18 [32m+[m[31m-[m
+ app/Models/ProductColor.php                                              |   2 [32m+[m
+ app/Models/ProductGallery.php                                            |   2 [32m+[m
+ app/Models/ProductImage.php                                              |   3 [32m+[m[31m-[m
+ app/Models/ProductType.php                                               |   7 [32m+[m
+ app/Models/ProfileWeb.php                                                |   8 [32m+[m[31m-[m
+ app/Providers/AppServiceProvider.php                                     |   6 [32m+[m[31m-[m
+ composer.json                                                            |   1 [32m+[m
+ composer.lock                                                            | 588 [32m+++++++++++++++++++++++++++++++++[m[31m-[m
+ public/.htaccess                                                         |  24 [32m+[m[31m-[m
+ public/favicon.ico                                                       |   0
+ public/index.php                                                         |  20 [31m--[m
+ public/robots.txt                                                        |   2 [31m-[m
+ resources/views/components/website/banner.blade.php                      |   8 [32m+[m[31m-[m
+ resources/views/components/website/layouts/app.blade.php                 |  49 [32m++[m[31m-[m
+ resources/views/components/website/layouts/partials/header.blade.php     |   2 [32m+[m[31m-[m
+ resources/views/pages/admin/components/layouts/head.blade.php            |   3 [32m+[m
+ resources/views/pages/admin/components/layouts/sidebar.blade.php         |  12 [32m+[m
+ resources/views/pages/admin/pages/dashboard.blade.php                    |  11 [32m+[m[31m-[m
+ resources/views/pages/admin/pages/front-pages/home/index.blade.php       |   2 [32m+[m[31m-[m
+ .../views/pages/admin/pages/product/create-product-color-img.blade.php   |  14 [32m+[m[31m-[m
+ resources/views/pages/admin/pages/product/create-product-color.blade.php |   4 [32m+[m[31m-[m
+ .../views/pages/admin/pages/product/create-product-gallery.blade.php     |  53 [32m++[m[31m-[m
+ resources/views/pages/admin/pages/product/create-product-type.blade.php  |  28 [32m+[m[31m-[m
+ resources/views/pages/admin/pages/product/create.blade.php               |  32 [32m+[m[31m-[m
+ resources/views/pages/admin/pages/product/index.blade.php                |   2 [32m+[m[31m-[m
+ resources/views/pages/website/about.blade.php                            |   4 [32m+[m[31m-[m
+ resources/views/pages/website/article/index.blade.php                    |  11 [32m+[m[31m-[m
+ resources/views/pages/website/article/show.blade.php                     |  10 [32m+[m[31m-[m
+ resources/views/pages/website/contact.blade.php                          |   6 [32m+[m[31m-[m
+ resources/views/pages/website/home.blade.php                             |  89 [32m+++[m[31m--[m
+ resources/views/pages/website/product/index.blade.php                    |  27 [32m+[m[31m-[m
+ resources/views/pages/website/product/show.blade.php                     |  69 [32m+++[m[31m-[m
+ resources/views/pages/website/service.blade.php                          | 130 [32m++++++[m[31m--[m
+ resources/views/pages/website/suku-cadang.blade.php                      |   4 [32m+[m[31m-[m
+ routes/web.php                                                           |  30 [32m++[m
+ storage/app/.gitignore                                                   |   0
+ storage/app/private/.gitignore                                           |   0
+ storage/app/public/.gitignore                                            |   0
+ storage/framework/.gitignore                                             |   0
+ storage/framework/cache/.gitignore                                       |   0
+ storage/framework/cache/data/.gitignore                                  |   0
+ storage/framework/sessions/.gitignore                                    |   0
+ storage/framework/testing/.gitignore                                     |   0
+ storage/framework/views/.gitignore                                       |   0
+ storage/logs/.gitignore                                                  |   0
+ 53 files changed, 1314 insertions(+), 263 deletions(-)

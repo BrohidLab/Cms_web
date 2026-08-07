@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductColor extends Model
 {
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = ['type_id', 'name', 'code_color', 'jenis_color', 'code_color2'];
 
     protected $casts = [

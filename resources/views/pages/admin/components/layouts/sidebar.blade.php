@@ -129,6 +129,18 @@ hover:bg-gray-100">
 
             </a>
 
+            <a href="{{ route('booking.index') }}"
+               class="flex items-center justify-between px-3 py-2 rounded-md {{ request()->routeIs('booking.*') ? 'bg-indigo-50 text-indigo-600 font-medium' : 'text-gray-600' }}  hover:bg-gray-100">
+   				<div class="flex items-center gap-3">
+   					<span class="material-symbols-outlined text-lg">chat</span>
+   						Booking Serive
+   				</div>
+   				@if (unreadBookings() > 0)
+    				<span class="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full">
+						{{unreadBookings()}}
+    				</span>
+    			@endif
+        	</a>
         </div>
 
         <!-- SYSTEM -->

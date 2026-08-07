@@ -79,7 +79,7 @@
                                         Edit
                                     </a>
 
-                                    <form action="{{ route('front_page.homes.store', $banner->id) }}" method="POST"
+                                    <form action="{{ route('front_page.homes.destroy', $banner->id) }}" method="POST"
                                         onsubmit="return confirm('Yakin hapus banner ini?')">
                                         @csrf
                                         @method('DELETE')

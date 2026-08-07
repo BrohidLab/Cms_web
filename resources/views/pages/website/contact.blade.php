@@ -53,7 +53,7 @@
                         </h4>
 
                         <p class="text-sm text-gray-600">
-                            {{ profileWeb()->no_wa ?? '' }}
+                            {{ profileWeb()?->no_wa ?? '' }}
                         </p>
 
                     </div>
@@ -86,7 +86,7 @@
                             Hubungi kami langsung melalui WhatsApp.
                         </p>
 
-                        <a href="https://wa.me/{{ profileWeb()->no_wa }}"
+                        <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
                             class="inline-block bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">
 
                             Chat WhatsApp
@@ -204,7 +204,7 @@
 
             <div class="rounded-xl overflow-hidden shadow">
 
-                <iframe
+                <iframe title="map-suzuki-auto-zone"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.773920721896!2d110.40700187411022!3d-7.15211857016343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708613d80b2435%3A0x2d8c0324fd8f3e3c!2sSuzuki%20Ungaran%20Sunmotor%20Indosentra%20Trada!5e0!3m2!1sid!2sid!4v1773667578604!5m2!1sid!2sid"
                     class="w-full h-[400px]" allowfullscreen="" loading="lazy">
                 </iframe>

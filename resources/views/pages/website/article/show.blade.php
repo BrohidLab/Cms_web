@@ -1,5 +1,9 @@
 @extends('components.website.layouts.app')
-
+@section('title', $article->meta_title ?? $article->title)
+@section('meta_description',
+    $article->meta_description ??
+    Str::limit(strip_tags($article->content), 160)
+)
 @section('content')
     <x-website.banner title="{{ $banner->title ?? 'Berita' }}" description="{{ $banner->sub_title ?? '' }}"
         image="{{ $banner && $banner->images
@@ -41,7 +45,7 @@
             <!-- IMAGE -->
 
             @if ($article->image)
-                <img src="{{ asset('storage/' . $article->image) }}" class="rounded-xl mb-8 w-full">
+                <img src="{{ asset('storage/' . $article->image) }}" class="rounded-xl mb-8 w-full" alt="Suzuki Semarang, Suzuki Auto Zone, Suzuki Semarang">
             @endif
 
 
@@ -108,7 +112,7 @@
                 @foreach ($related as $item)
                     <article class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
 
-                        <img src="{{ asset('storage/' . $item->thumbnail) }}" class="h-48 w-full object-cover">
+                        <img src="{{ asset('storage/' . $item->thumbnail) }}" class="h-48 w-full object-cover" alt="Artikel Suzuki Semarang, Suzuki Auto Zone, Suzuki Semarang">
 
                         <div class="p-5">
 

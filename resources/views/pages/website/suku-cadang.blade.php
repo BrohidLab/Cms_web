@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Banner -->
-    <x-website.banner title="{!! $banner->title ?? 'Suku Cadang' !!}" description="{{ $banner->sub_title ?? '' }}"
+    <x-website.banner title="{!! $banner?->title ?? 'Suku Cadang' !!}" description="{{ $banner?->sub_title ?? '' }}"
         image="{{ $banner && $banner->images
             ? asset('storage/' . $banner->images)
             : 'https://suzuki.co.id/themes/default/assets/images/suzuki-default-mobile.jpg' }}"
@@ -76,7 +76,7 @@
                             Hubungi tim kami melalui WhatsApp untuk konsultasi langsung.
                         </p>
 
-                        <a href="https://wa.me/{{ profileWeb()->no_wa }}"
+                        <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
                             class="inline-block bg-white text-blue-600 px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition">
 
                             Chat WhatsApp

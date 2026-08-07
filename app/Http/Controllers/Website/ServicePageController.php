@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\BannerPage;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,7 @@ class ServicePageController extends Controller
         $banner = BannerPage::where('pages_name', 'service')
 					->orderBy('id', 'desc')
 					->first();
-    	return view('pages.website.service', compact('banner'));
+		$products = Product::all();
+    	return view('pages.website.service', compact('banner', 'products'));
     }
 }

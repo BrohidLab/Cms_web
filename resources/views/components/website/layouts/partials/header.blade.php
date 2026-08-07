@@ -6,7 +6,7 @@
 
         <!-- Logo -->
         <div class="w-auto mr-5">
-            <img src="{{ asset('storage/' . profileWeb()->logo) }}" />
+            <img src="{{ asset('storage/' . profileWeb()?->logo) }}" alt="Suzuki Semarang, Suzuki Auto Zone" aria-label="Suzuki Semarang, Suzuki Auto Zone" />
         </div>
 
         <!-- MENU (hidden saat normal) -->

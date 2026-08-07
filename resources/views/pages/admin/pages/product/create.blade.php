@@ -9,7 +9,7 @@
         </div>
 
         <form action="{{ $product ? route('product.update_product', $product->id) : route('product.store_product') }}"
-            method="POST">
+            method="POST" enctype="multipart/form-data">
 
             @csrf
 
@@ -45,7 +45,37 @@
                             <input type="text" name="cc" value="{{ old('cc', $product->cc ?? '') }}"
                                 class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Banner Image
+                            </label>
 
+                            <div class="border border-dashed border-gray-300 rounded-xl p-4 text-center">
+
+                                @if (isset($product->banner_page))
+                                    <img src="{{ asset('storage/' . $product->banner_page) }}"
+                                        class="w-full h-52 object-cover rounded-lg mb-3">
+                                @else
+                                    <div class="h-52 flex items-center justify-center text-gray-400 text-sm">
+                                        No image uploaded
+                                    </div>
+                                @endif
+
+                                <input type="file" name="banner_page" class="text-sm">
+
+                                <p class="text-xs text-gray-400 mt-2">
+                                    Recommended size 1400 x 600 px
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Link Download Brosur</label>
+                            <input type="text" name="link_brosur"
+                                value="{{ old('link_brosur', $product->link_brosur ?? '') }}"
+                                class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
 
                         <div class="md:col-span-2">
                             <label class="block text-sm font-medium text-gray-600 mb-1">Description</label>

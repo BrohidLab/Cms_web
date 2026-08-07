@@ -9,7 +9,8 @@ use App\Observers\ProfileWebObserver;
 class ProfileWeb extends Model
 {
 	public $incrementing = false;
-	protected $fillable = [
+    protected $keyType = 'string';
+    protected $fillable = [
         'name',
         'description_short',
         'about',
@@ -29,10 +30,5 @@ class ProfileWeb extends Model
     {
         parent::boot();
         self::observe(ProfileWebObserver::class);
-    }
-
-    public function socials()
-    {
-        return $this->hasMany(SocialMedia::class);
     }
 }
