@@ -166,6 +166,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('user-admin/Konsultasi')->name('konsultasi.')->group(function () {
         Route::get('/', [ConsultationController::class, 'index'])->name('index');
         Route::get('/detail/{id}', [ConsultationController::class, 'show'])->name('show');
+        Route::delete('/{id}/delete', [ConsultationController::class, 'destroy'])->name('delete');
     });
     Route::prefix('user-admin/booking-service')->name('booking.')->group(function () {
         Route::get('/', [BookingServiceController::class, 'index'])->name('index');

@@ -18,21 +18,19 @@ class ConsultationController extends Controller
 
             $query->where(function ($q) use ($search) {
 
-                $q->where('name','like',"%$search%")
-                  ->orWhere('no_wa','like',"%$search%")
-                  ->orWhere('lokasi','like',"%$search%")
-                  ->orWhere('pesan','like',"%$search%")
-                  ->orWhereHas('product',function($p) use ($search){
-                      $p->where('name','like',"%$search%");
-                  });
-
+                $q->where('name', 'like', "%$search%")
+                    ->orWhere('no_wa', 'like', "%$search%")
+                    ->orWhere('lokasi', 'like', "%$search%")
+                    ->orWhere('pesan', 'like', "%$search%")
+                    ->orWhereHas('product', function ($p) use ($search) {
+                        $p->where('name', 'like', "%$search%");
+                    });
             });
-
         }
 
         $consultations = $query->latest()->paginate(10);
 
-        return view('pages.admin.pages.consultation.index',compact('consultations'));
+        return view('pages.admin.pages.consultation.index', compact('consultations'));
     }
 
     public function show($id)
@@ -44,5 +42,13 @@ class ConsultationController extends Controller
             ]);
         }
         return view('pages.admin.pages.consultation.show', compact('consultation'));
+    }
+
+    public function destroy($id)
+    {
+        $consul = Consultation::findOrFail($id);
+        $consul->delete();
+
+        return back()->with('success', 'Konsultasi berhasil dihapus');
     }
 }

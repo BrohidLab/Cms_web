@@ -65,7 +65,7 @@
                                 {{ $consultation->pesan }}
                             </td>
 
-                            <td class="px-6 py-4 text-center">
+                            <td class="px-6 py-4 text-center gap-4 flex items-center">
 
                                 {{-- <a 
                         target="_blank"
@@ -82,6 +82,14 @@
                                     Baca Pesan
 
                                 </a>
+                                <form action="{{ route('konsultasi.delete', $consultation->id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin hapus artikel?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="text-red-600 hover:text-red-800">
+                                        <span class="material-symbols-outlined text-lg">delete</span>
+                                    </button>
+                                </form>
 
                             </td>
 
