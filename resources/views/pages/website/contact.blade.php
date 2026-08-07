@@ -86,7 +86,7 @@
                             Hubungi kami langsung melalui WhatsApp.
                         </p>
 
-                        <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
+                        <a href="{{ route('meta_wa', profileWeb()->no_wa) }}" onclick="fbq('track', 'Lead');"
                             class="inline-block bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">
 
                             Chat WhatsApp
