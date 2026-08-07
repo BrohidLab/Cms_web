@@ -99,7 +99,7 @@
             </button>
 
             <!-- Menu Items -->
-            <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-2">
+            <div id="fabMenu" class="block flex-col items-end space-y-3 mb-2">
 
                 <a href="{{ route('meta_wa', profileWeb()->no_wa) }}" onclick="fbq('track', 'Lead');"
                     class="group relative flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:scale-110 transition">
