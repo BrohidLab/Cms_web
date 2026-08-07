@@ -1,7 +1,5 @@
 @extends('components.website.layouts.app')
-@section('title',
-    $product->meta_title ?? $product->name . ' | Harga & Spesifikasi - Suzuki Auto Zone'
-)
+@section('title', $product->meta_title ?? $product->name . ' | Harga & Spesifikasi - Suzuki Auto Zone')
 
 @section('content')
     <x-website.banner title="{{ $product->name ?? 'Tentang Kami' }}" description=""
@@ -13,7 +11,8 @@
     <section>
         <div class="relative">
             @foreach ($product->brosurImage as $brosr)
-                <img src="{{ asset('storage/' . $brosr->images) }}" alt="{{ $product->name }} Brosur Suzuki Auto Zone" class="w-full h-auto object-cover" />
+                <img src="{{ asset('storage/' . $brosr->images) }}" alt="{{ $product->name }} Brosur Suzuki Auto Zone"
+                    class="w-full h-auto object-cover" />
             @endforeach
             <div class="flex border-b justify-center py-10 w-full bg-white gap-2">
                 <div x-data="{ tab: 0 }" class="w-full bg-white py-10">
@@ -125,7 +124,8 @@
                     <div x-show="galleryTab=='exterior'" class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
                         @foreach ($product->galleries->where('category', 'exterior') as $gallery)
-                            <img src="{{ asset('storage/' . $gallery->image) }}" class="rounded-lg w-full" alt="Suzuki Exterior, Suzuki Auto Zone Exterior">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" class="rounded-lg w-full"
+                                alt="Suzuki Exterior, Suzuki Auto Zone Exterior">
                         @endforeach
 
                     </div>
@@ -135,7 +135,8 @@
                     <div x-show="galleryTab=='interior'" class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
                         @foreach ($product->galleries->where('category', 'interior') as $gallery)
-                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="Suzuki Interior, Suzuki Auto Zone Interior" class="rounded-lg w-full">
+                            <img src="{{ asset('storage/' . $gallery->image) }}"
+                                alt="Suzuki Interior, Suzuki Auto Zone Interior" class="rounded-lg w-full">
                         @endforeach
 
                     </div>
@@ -147,8 +148,12 @@
                 {{-- IMAGE PRODUK --}}
                 <div class="text-center">
                     @if ($product->mainImage)
-                        <img src="{{ asset('storage/' . $product->mainImage->image) }}" alt="{{$product->name}}" class="mx-auto w-full max-w-md">
+                        <img src="{{ asset('storage/' . $product->mainImage->image) }}" alt="{{ $product->name }}"
+                            class="mx-auto w-full max-w-md">
                     @endif
+                    <a href="{{ route('meta_wa', profileWeb()->no_wa) }}" onclick="fbq('track', 'Lead');"
+                        class="bg-green-500 text-white px-6 py-2 mt-5 rounded-md font-bold">Chat
+                        Sekarang</a>
                 </div>
 
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="google-site-verification" content="0UiH68VYJgPDUtDXvpBW91k9jMr0HRlKeaZ2QkTRJuM" />
+    <meta name="google-site-verification" content="0UiH68VYJgPDUtDXvpBW91k9jMr0HRlKeaZ2QkTRJuM" />
     <title>@yield('title', 'Suzuki Auto Zone')</title>
     <meta name="description" content="@yield('meta_description', 'Deskripsi default')">
     <meta name="keywords" content="@yield('meta_keywords', 'keyword default')">
@@ -18,31 +18,63 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1391372406265925');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1391372406265925&ev=PageView&noscript=1"
-/></noscript>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18097535665"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    @if (config('meta.pixel_id'))
+        <script>
+            ! function(f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function() {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) :
+                        n.queue.push(arguments)
+                };
 
-  gtag('config', 'AW-18097535665');
-</script>
-        
+                if (!f._fbq) f._fbq = n;
+
+                n.push = n;
+
+                n.loaded = true;
+
+                n.version = '2.0';
+
+                n.queue = [];
+
+                t = b.createElement(e);
+
+                t.async = true;
+
+                t.src = v;
+
+                s = b.getElementsByTagName(e)[0];
+
+                s.parentNode.insertBefore(t, s);
+
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', '{{ config('meta.pixel_id') }}');
+
+            fbq('track', 'PageView');
+        </script>
+
+        <noscript>
+            <img height="1" width="1" style="display:none"
+                src="https://www.facebook.com/tr?id={{ config('meta.pixel_id') }}&ev=PageView&noscript=1" />
+        </noscript>
+    @endif
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18097535665"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-18097535665');
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     @stack('style')
     <style>
@@ -69,7 +101,7 @@ src="https://www.facebook.com/tr?id=1391372406265925&ev=PageView&noscript=1"
             <!-- Menu Items -->
             <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-2">
 
-                <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
+                <a href="{{ route('meta_wa', profileWeb()->no_wa) }}" onclick="fbq('track', 'Lead');"
                     class="group relative flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -82,7 +114,7 @@ src="https://www.facebook.com/tr?id=1391372406265925&ev=PageView&noscript=1"
                     </span>
                 </a>
 
-                <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
+                <a href="{{ route('meta_wa', profileWeb()->no_wa) }}" onclick="fbq('track', 'Lead');"
                     class="group relative flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -95,7 +127,7 @@ src="https://www.facebook.com/tr?id=1391372406265925&ev=PageView&noscript=1"
                     </span>
                 </a>
 
-                <a href="https://wa.me/{{ profileWeb()?->no_wa }}"
+                <a href="{{ route('meta_wa', profileWeb()->no_wa) }}" onclick="fbq('track', 'Lead');"
                     class="group relative flex items-center justify-center w-12 h-12 bg-yellow-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -108,7 +140,7 @@ src="https://www.facebook.com/tr?id=1391372406265925&ev=PageView&noscript=1"
                     </span>
                 </a>
 
-                <a href="{{route('website.simulasi')}}"
+                <a href="{{ route('website.simulasi') }}"
                     class="group relative flex items-center justify-center w-12 h-12 bg-purple-500 text-white rounded-full shadow-lg hover:scale-110 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
